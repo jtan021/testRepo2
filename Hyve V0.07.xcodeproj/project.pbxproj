@@ -1,0 +1,839 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */; };
+		169871B21D1CB437002116DE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B11D1CB437002116DE /* BaseView.swift */; };
+		169871B41D1CB5AC002116DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B31D1CB5AC002116DE /* Constants.swift */; };
+		169871B61D1CB6F1002116DE /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B51D1CB6F1002116DE /* UIViewControllerExtensions.swift */; };
+		169871C01D1CBC28002116DE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BA1D1CBC28002116DE /* Bolts.framework */; };
+		169871C11D1CBC28002116DE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BB1D1CBC28002116DE /* Parse.framework */; };
+		169871C21D1CBC28002116DE /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BC1D1CBC28002116DE /* ParseFacebookUtils.framework */; };
+		169871C31D1CBC28002116DE /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BD1D1CBC28002116DE /* ParseFacebookUtilsV4.framework */; };
+		169871C41D1CBC28002116DE /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BE1D1CBC28002116DE /* ParseTwitterUtils.framework */; };
+		169871C51D1CBC28002116DE /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871BF1D1CBC28002116DE /* ParseUI.framework */; };
+		169871C71D1CBC6D002116DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871C61D1CBC6D002116DE /* AudioToolbox.framework */; };
+		169871C91D1CBC72002116DE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871C81D1CBC72002116DE /* CFNetwork.framework */; };
+		169871CB1D1CBC77002116DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871CA1D1CBC77002116DE /* CoreGraphics.framework */; };
+		169871CD1D1CBC7E002116DE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871CC1D1CBC7E002116DE /* CoreLocation.framework */; };
+		169871CF1D1CBC84002116DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871CE1D1CBC84002116DE /* QuartzCore.framework */; };
+		169871D11D1CBC88002116DE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871D01D1CBC88002116DE /* Security.framework */; };
+		169871D31D1CBC8D002116DE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871D21D1CBC8D002116DE /* StoreKit.framework */; };
+		169871D51D1CBC93002116DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871D41D1CBC93002116DE /* SystemConfiguration.framework */; };
+		169871D71D1CBC97002116DE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871D61D1CBC97002116DE /* libz.tbd */; };
+		169871D91D1CBC9E002116DE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 169871D81D1CBC9E002116DE /* libsqlite3.tbd */; };
+		169871DB1D1CC567002116DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871DA1D1CC567002116DE /* HomeViewController.swift */; };
+		169871DD1D1CC604002116DE /* SearchLocationAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871DC1D1CC604002116DE /* SearchLocationAddressViewModel.swift */; };
+		169871DF1D1CCB47002116DE /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871DE1D1CCB47002116DE /* UIStoryboardExtensions.swift */; };
+		169871E11D1CD75F002116DE /* RequestCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E01D1CD75F002116DE /* RequestCategoryViewModel.swift */; };
+		169871E31D1CDB89002116DE /* RequestCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E21D1CDB89002116DE /* RequestCategoryCell.swift */; };
+		169871E51D1D9323002116DE /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E41D1D9323002116DE /* SearchTextField.swift */; };
+		16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */; };
+		16C2E3C01D1A53B800321A56 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */; };
+		16C2E3C21D1A53B800321A56 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3C11D1A53B800321A56 /* SecondViewController.swift */; };
+		16C2E3C51D1A53B800321A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C31D1A53B800321A56 /* Main.storyboard */; };
+		16C2E3CA1D1A53B800321A56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */; };
+		16C2E3D51D1A53B800321A56 /* Hyve_V0_07Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3D41D1A53B800321A56 /* Hyve_V0_07Tests.swift */; };
+		16C2E3E01D1A53B800321A56 /* Hyve_V0_07UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */; };
+		16C2E3EE1D1A565400321A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3ED1D1A565400321A56 /* Assets.xcassets */; };
+		16F599AD1D1BA3C100709978 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F599AC1D1BA3C100709978 /* MapKit.framework */; };
+		21A35A962D2D50AC1AC13896 /* Pods_Hyve_V0_07Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F71EBCAA1DEB793BFDE465 /* Pods_Hyve_V0_07Tests.framework */; };
+		8616C6E25097A365C17A3828 /* Pods_Hyve_V0_07.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1970969A003612236E164 /* Pods_Hyve_V0_07.framework */; };
+		F23DBC582828391E6271AB8D /* Pods_Hyve_V0_07UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D883C3182D9146621C0590 /* Pods_Hyve_V0_07UITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		16C2E3D11D1A53B800321A56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C2E3B21D1A53B800321A56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 16C2E3B91D1A53B800321A56;
+			remoteInfo = "Hyve V0.07";
+		};
+		16C2E3DC1D1A53B800321A56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16C2E3B21D1A53B800321A56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 16C2E3B91D1A53B800321A56;
+			remoteInfo = "Hyve V0.07";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02F71EBCAA1DEB793BFDE465 /* Pods_Hyve_V0_07Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyve_V0_07Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FA05503E5B1C26BC25E5754 /* Pods-Hyve V0.07UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07UITests/Pods-Hyve V0.07UITests.release.xcconfig"; sourceTree = "<group>"; };
+		169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
+		169871B11D1CB437002116DE /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		169871B31D1CB5AC002116DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		169871B51D1CB6F1002116DE /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		169871B71D1CB90B002116DE /* Hyve V0.07-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hyve V0.07-Bridging-Header.h"; sourceTree = "<group>"; };
+		169871BA1D1CBC28002116DE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		169871BB1D1CBC28002116DE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		169871BC1D1CBC28002116DE /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		169871BD1D1CBC28002116DE /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		169871BE1D1CBC28002116DE /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		169871BF1D1CBC28002116DE /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		169871C61D1CBC6D002116DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		169871C81D1CBC72002116DE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		169871CA1D1CBC77002116DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		169871CC1D1CBC7E002116DE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		169871CE1D1CBC84002116DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		169871D01D1CBC88002116DE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		169871D21D1CBC8D002116DE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		169871D41D1CBC93002116DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		169871D61D1CBC97002116DE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		169871D81D1CBC9E002116DE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		169871DA1D1CC567002116DE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		169871DC1D1CC604002116DE /* SearchLocationAddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationAddressViewModel.swift; sourceTree = "<group>"; };
+		169871DE1D1CCB47002116DE /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
+		169871E01D1CD75F002116DE /* RequestCategoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCategoryViewModel.swift; sourceTree = "<group>"; };
+		169871E21D1CDB89002116DE /* RequestCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCategoryCell.swift; sourceTree = "<group>"; };
+		169871E41D1D9323002116DE /* SearchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		16C2E3BA1D1A53B800321A56 /* Hyve V0.07.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyve V0.07.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		16C2E3C11D1A53B800321A56 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		16C2E3C41D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16C2E3C91D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		16C2E3CB1D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16C2E3D01D1A53B800321A56 /* Hyve V0.07Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hyve V0.07Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16C2E3D41D1A53B800321A56 /* Hyve_V0_07Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyve_V0_07Tests.swift; sourceTree = "<group>"; };
+		16C2E3D61D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16C2E3DB1D1A53B800321A56 /* Hyve V0.07UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hyve V0.07UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyve_V0_07UITests.swift; sourceTree = "<group>"; };
+		16C2E3E11D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16C2E3ED1D1A565400321A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		16F599AC1D1BA3C100709978 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		48349CF6F1BD2D37184E994F /* Pods-Hyve V0.07UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07UITests/Pods-Hyve V0.07UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D3083E09098B448654A9A55 /* Pods-Hyve V0.07.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07/Pods-Hyve V0.07.debug.xcconfig"; sourceTree = "<group>"; };
+		6DF1970969A003612236E164 /* Pods_Hyve_V0_07.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyve_V0_07.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F16F56D8FB851EC8FFC11D1 /* Pods-Hyve V0.07.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07/Pods-Hyve V0.07.release.xcconfig"; sourceTree = "<group>"; };
+		A7D883C3182D9146621C0590 /* Pods_Hyve_V0_07UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyve_V0_07UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD58DE1E7160538CF1DFD465 /* Pods-Hyve V0.07Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07Tests/Pods-Hyve V0.07Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F3C92F61B3CE17A1A77B21CB /* Pods-Hyve V0.07Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07Tests/Pods-Hyve V0.07Tests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16C2E3B71D1A53B800321A56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				169871D91D1CBC9E002116DE /* libsqlite3.tbd in Frameworks */,
+				169871D71D1CBC97002116DE /* libz.tbd in Frameworks */,
+				169871D51D1CBC93002116DE /* SystemConfiguration.framework in Frameworks */,
+				169871D31D1CBC8D002116DE /* StoreKit.framework in Frameworks */,
+				169871D11D1CBC88002116DE /* Security.framework in Frameworks */,
+				169871CF1D1CBC84002116DE /* QuartzCore.framework in Frameworks */,
+				169871CD1D1CBC7E002116DE /* CoreLocation.framework in Frameworks */,
+				169871CB1D1CBC77002116DE /* CoreGraphics.framework in Frameworks */,
+				169871C91D1CBC72002116DE /* CFNetwork.framework in Frameworks */,
+				169871C71D1CBC6D002116DE /* AudioToolbox.framework in Frameworks */,
+				169871C01D1CBC28002116DE /* Bolts.framework in Frameworks */,
+				16F599AD1D1BA3C100709978 /* MapKit.framework in Frameworks */,
+				169871C31D1CBC28002116DE /* ParseFacebookUtilsV4.framework in Frameworks */,
+				169871C41D1CBC28002116DE /* ParseTwitterUtils.framework in Frameworks */,
+				169871C11D1CBC28002116DE /* Parse.framework in Frameworks */,
+				169871C21D1CBC28002116DE /* ParseFacebookUtils.framework in Frameworks */,
+				169871C51D1CBC28002116DE /* ParseUI.framework in Frameworks */,
+				8616C6E25097A365C17A3828 /* Pods_Hyve_V0_07.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3CD1D1A53B800321A56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A35A962D2D50AC1AC13896 /* Pods_Hyve_V0_07Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3D81D1A53B800321A56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F23DBC582828391E6271AB8D /* Pods_Hyve_V0_07UITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		169871AC1D1CB363002116DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				169871DC1D1CC604002116DE /* SearchLocationAddressViewModel.swift */,
+				169871E01D1CD75F002116DE /* RequestCategoryViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		169871AD1D1CB378002116DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				169871B31D1CB5AC002116DE /* Constants.swift */,
+				169871B51D1CB6F1002116DE /* UIViewControllerExtensions.swift */,
+				169871DE1D1CCB47002116DE /* UIStoryboardExtensions.swift */,
+				169871E21D1CDB89002116DE /* RequestCategoryCell.swift */,
+				169871E41D1D9323002116DE /* SearchTextField.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		169871AE1D1CB396002116DE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */,
+				169871DA1D1CC567002116DE /* HomeViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		16C2E3B11D1A53B800321A56 = {
+			isa = PBXGroup;
+			children = (
+				16C2E3BC1D1A53B800321A56 /* Hyve V0.07 */,
+				16C2E3D31D1A53B800321A56 /* Hyve V0.07Tests */,
+				16C2E3DE1D1A53B800321A56 /* Hyve V0.07UITests */,
+				16C2E3BB1D1A53B800321A56 /* Products */,
+				AA966DD43E6A1B2B38A2858D /* Pods */,
+				A327F8D1737EA4EFB9FD0EA3 /* Frameworks */,
+				169871B71D1CB90B002116DE /* Hyve V0.07-Bridging-Header.h */,
+			);
+			sourceTree = "<group>";
+		};
+		16C2E3BB1D1A53B800321A56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16C2E3BA1D1A53B800321A56 /* Hyve V0.07.app */,
+				16C2E3D01D1A53B800321A56 /* Hyve V0.07Tests.xctest */,
+				16C2E3DB1D1A53B800321A56 /* Hyve V0.07UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		16C2E3BC1D1A53B800321A56 /* Hyve V0.07 */ = {
+			isa = PBXGroup;
+			children = (
+				169871AE1D1CB396002116DE /* ViewControllers */,
+				169871AD1D1CB378002116DE /* Models */,
+				169871AC1D1CB363002116DE /* ViewModels */,
+				16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */,
+				16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */,
+				16C2E3C11D1A53B800321A56 /* SecondViewController.swift */,
+				16C2E3C31D1A53B800321A56 /* Main.storyboard */,
+				16C2E3ED1D1A565400321A56 /* Assets.xcassets */,
+				16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */,
+				16C2E3CB1D1A53B800321A56 /* Info.plist */,
+				169871B11D1CB437002116DE /* BaseView.swift */,
+			);
+			path = "Hyve V0.07";
+			sourceTree = "<group>";
+		};
+		16C2E3D31D1A53B800321A56 /* Hyve V0.07Tests */ = {
+			isa = PBXGroup;
+			children = (
+				16C2E3D41D1A53B800321A56 /* Hyve_V0_07Tests.swift */,
+				16C2E3D61D1A53B800321A56 /* Info.plist */,
+			);
+			path = "Hyve V0.07Tests";
+			sourceTree = "<group>";
+		};
+		16C2E3DE1D1A53B800321A56 /* Hyve V0.07UITests */ = {
+			isa = PBXGroup;
+			children = (
+				16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */,
+				16C2E3E11D1A53B800321A56 /* Info.plist */,
+			);
+			path = "Hyve V0.07UITests";
+			sourceTree = "<group>";
+		};
+		A327F8D1737EA4EFB9FD0EA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				169871D81D1CBC9E002116DE /* libsqlite3.tbd */,
+				169871D61D1CBC97002116DE /* libz.tbd */,
+				169871D41D1CBC93002116DE /* SystemConfiguration.framework */,
+				169871D21D1CBC8D002116DE /* StoreKit.framework */,
+				169871D01D1CBC88002116DE /* Security.framework */,
+				169871CE1D1CBC84002116DE /* QuartzCore.framework */,
+				169871CC1D1CBC7E002116DE /* CoreLocation.framework */,
+				169871CA1D1CBC77002116DE /* CoreGraphics.framework */,
+				169871C81D1CBC72002116DE /* CFNetwork.framework */,
+				169871C61D1CBC6D002116DE /* AudioToolbox.framework */,
+				169871BA1D1CBC28002116DE /* Bolts.framework */,
+				169871BB1D1CBC28002116DE /* Parse.framework */,
+				169871BC1D1CBC28002116DE /* ParseFacebookUtils.framework */,
+				169871BD1D1CBC28002116DE /* ParseFacebookUtilsV4.framework */,
+				169871BE1D1CBC28002116DE /* ParseTwitterUtils.framework */,
+				169871BF1D1CBC28002116DE /* ParseUI.framework */,
+				16F599AC1D1BA3C100709978 /* MapKit.framework */,
+				6DF1970969A003612236E164 /* Pods_Hyve_V0_07.framework */,
+				02F71EBCAA1DEB793BFDE465 /* Pods_Hyve_V0_07Tests.framework */,
+				A7D883C3182D9146621C0590 /* Pods_Hyve_V0_07UITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA966DD43E6A1B2B38A2858D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D3083E09098B448654A9A55 /* Pods-Hyve V0.07.debug.xcconfig */,
+				7F16F56D8FB851EC8FFC11D1 /* Pods-Hyve V0.07.release.xcconfig */,
+				F3C92F61B3CE17A1A77B21CB /* Pods-Hyve V0.07Tests.debug.xcconfig */,
+				CD58DE1E7160538CF1DFD465 /* Pods-Hyve V0.07Tests.release.xcconfig */,
+				48349CF6F1BD2D37184E994F /* Pods-Hyve V0.07UITests.debug.xcconfig */,
+				0FA05503E5B1C26BC25E5754 /* Pods-Hyve V0.07UITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16C2E3B91D1A53B800321A56 /* Hyve V0.07 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16C2E3E41D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07" */;
+			buildPhases = (
+				A982768FA1FF0DCBC79B1468 /* [CP] Check Pods Manifest.lock */,
+				16C2E3B61D1A53B800321A56 /* Sources */,
+				16C2E3B71D1A53B800321A56 /* Frameworks */,
+				16C2E3B81D1A53B800321A56 /* Resources */,
+				90086EF6C7147FC6E1E9C0B2 /* [CP] Embed Pods Frameworks */,
+				6F3CCFE649ECB36A318C336F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hyve V0.07";
+			productName = "Hyve V0.07";
+			productReference = 16C2E3BA1D1A53B800321A56 /* Hyve V0.07.app */;
+			productType = "com.apple.product-type.application";
+		};
+		16C2E3CF1D1A53B800321A56 /* Hyve V0.07Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16C2E3E71D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07Tests" */;
+			buildPhases = (
+				B306B03D77DD197BC8D95CC1 /* [CP] Check Pods Manifest.lock */,
+				16C2E3CC1D1A53B800321A56 /* Sources */,
+				16C2E3CD1D1A53B800321A56 /* Frameworks */,
+				16C2E3CE1D1A53B800321A56 /* Resources */,
+				833F625AA42E868229640573 /* [CP] Embed Pods Frameworks */,
+				57D0591B87ACA0A48479CA71 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				16C2E3D21D1A53B800321A56 /* PBXTargetDependency */,
+			);
+			name = "Hyve V0.07Tests";
+			productName = "Hyve V0.07Tests";
+			productReference = 16C2E3D01D1A53B800321A56 /* Hyve V0.07Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		16C2E3DA1D1A53B800321A56 /* Hyve V0.07UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16C2E3EA1D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07UITests" */;
+			buildPhases = (
+				360D1E1914B60BA8012FF670 /* [CP] Check Pods Manifest.lock */,
+				16C2E3D71D1A53B800321A56 /* Sources */,
+				16C2E3D81D1A53B800321A56 /* Frameworks */,
+				16C2E3D91D1A53B800321A56 /* Resources */,
+				D109C14C4405BB810BA67329 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				16C2E3DD1D1A53B800321A56 /* PBXTargetDependency */,
+			);
+			name = "Hyve V0.07UITests";
+			productName = "Hyve V0.07UITests";
+			productReference = 16C2E3DB1D1A53B800321A56 /* Hyve V0.07UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		16C2E3B21D1A53B800321A56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Jonathan Tan";
+				TargetAttributes = {
+					16C2E3B91D1A53B800321A56 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 9DP9RLSMK2;
+					};
+					16C2E3CF1D1A53B800321A56 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 9DP9RLSMK2;
+						TestTargetID = 16C2E3B91D1A53B800321A56;
+					};
+					16C2E3DA1D1A53B800321A56 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 9DP9RLSMK2;
+						TestTargetID = 16C2E3B91D1A53B800321A56;
+					};
+				};
+			};
+			buildConfigurationList = 16C2E3B51D1A53B800321A56 /* Build configuration list for PBXProject "Hyve V0.07" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 16C2E3B11D1A53B800321A56;
+			productRefGroup = 16C2E3BB1D1A53B800321A56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16C2E3B91D1A53B800321A56 /* Hyve V0.07 */,
+				16C2E3CF1D1A53B800321A56 /* Hyve V0.07Tests */,
+				16C2E3DA1D1A53B800321A56 /* Hyve V0.07UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		16C2E3B81D1A53B800321A56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16C2E3CA1D1A53B800321A56 /* LaunchScreen.storyboard in Resources */,
+				16C2E3EE1D1A565400321A56 /* Assets.xcassets in Resources */,
+				16C2E3C51D1A53B800321A56 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3CE1D1A53B800321A56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3D91D1A53B800321A56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		360D1E1914B60BA8012FF670 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		57D0591B87ACA0A48479CA71 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyve V0.07Tests/Pods-Hyve V0.07Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F3CCFE649ECB36A318C336F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyve V0.07/Pods-Hyve V0.07-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		833F625AA42E868229640573 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyve V0.07Tests/Pods-Hyve V0.07Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90086EF6C7147FC6E1E9C0B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyve V0.07/Pods-Hyve V0.07-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A982768FA1FF0DCBC79B1468 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B306B03D77DD197BC8D95CC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D109C14C4405BB810BA67329 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hyve V0.07UITests/Pods-Hyve V0.07UITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		16C2E3B61D1A53B800321A56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16C2E3C21D1A53B800321A56 /* SecondViewController.swift in Sources */,
+				169871DD1D1CC604002116DE /* SearchLocationAddressViewModel.swift in Sources */,
+				16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */,
+				169871B21D1CB437002116DE /* BaseView.swift in Sources */,
+				169871DB1D1CC567002116DE /* HomeViewController.swift in Sources */,
+				16C2E3C01D1A53B800321A56 /* FirstViewController.swift in Sources */,
+				169871E11D1CD75F002116DE /* RequestCategoryViewModel.swift in Sources */,
+				169871E31D1CDB89002116DE /* RequestCategoryCell.swift in Sources */,
+				169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */,
+				169871B41D1CB5AC002116DE /* Constants.swift in Sources */,
+				169871DF1D1CCB47002116DE /* UIStoryboardExtensions.swift in Sources */,
+				169871B61D1CB6F1002116DE /* UIViewControllerExtensions.swift in Sources */,
+				169871E51D1D9323002116DE /* SearchTextField.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3CC1D1A53B800321A56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16C2E3D51D1A53B800321A56 /* Hyve_V0_07Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16C2E3D71D1A53B800321A56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16C2E3E01D1A53B800321A56 /* Hyve_V0_07UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		16C2E3D21D1A53B800321A56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 16C2E3B91D1A53B800321A56 /* Hyve V0.07 */;
+			targetProxy = 16C2E3D11D1A53B800321A56 /* PBXContainerItemProxy */;
+		};
+		16C2E3DD1D1A53B800321A56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 16C2E3B91D1A53B800321A56 /* Hyve V0.07 */;
+			targetProxy = 16C2E3DC1D1A53B800321A56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		16C2E3C31D1A53B800321A56 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16C2E3C41D1A53B800321A56 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16C2E3C91D1A53B800321A56 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		16C2E3E21D1A53B800321A56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		16C2E3E31D1A53B800321A56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		16C2E3E51D1A53B800321A56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D3083E09098B448654A9A55 /* Pods-Hyve V0.07.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Hyve V0.07/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hyve V0.07-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		16C2E3E61D1A53B800321A56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F16F56D8FB851EC8FFC11D1 /* Pods-Hyve V0.07.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Hyve V0.07/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hyve V0.07-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		16C2E3E81D1A53B800321A56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3C92F61B3CE17A1A77B21CB /* Pods-Hyve V0.07Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Hyve V0.07Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hyve V0.07.app/Hyve V0.07";
+			};
+			name = Debug;
+		};
+		16C2E3E91D1A53B800321A56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD58DE1E7160538CF1DFD465 /* Pods-Hyve V0.07Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Hyve V0.07Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hyve V0.07.app/Hyve V0.07";
+			};
+			name = Release;
+		};
+		16C2E3EB1D1A53B800321A56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48349CF6F1BD2D37184E994F /* Pods-Hyve V0.07UITests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "Hyve V0.07UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Hyve V0.07";
+			};
+			name = Debug;
+		};
+		16C2E3EC1D1A53B800321A56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FA05503E5B1C26BC25E5754 /* Pods-Hyve V0.07UITests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "Hyve V0.07UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Hyve V0.07";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16C2E3B51D1A53B800321A56 /* Build configuration list for PBXProject "Hyve V0.07" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16C2E3E21D1A53B800321A56 /* Debug */,
+				16C2E3E31D1A53B800321A56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16C2E3E41D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16C2E3E51D1A53B800321A56 /* Debug */,
+				16C2E3E61D1A53B800321A56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16C2E3E71D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16C2E3E81D1A53B800321A56 /* Debug */,
+				16C2E3E91D1A53B800321A56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16C2E3EA1D1A53B800321A56 /* Build configuration list for PBXNativeTarget "Hyve V0.07UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16C2E3EB1D1A53B800321A56 /* Debug */,
+				16C2E3EC1D1A53B800321A56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16C2E3B21D1A53B800321A56 /* Project object */;
+}

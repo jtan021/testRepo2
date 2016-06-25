@@ -1,0 +1,6 @@
+framework module Pods_Hyve_V0_07Tests {
+  umbrella header "Pods-Hyve V0.07Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
