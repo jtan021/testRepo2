@@ -133,10 +133,55 @@ extension UIViewController {
     // Output: ...
     // Function: Transforms textView's layers to appear similar to a TextField
     func TextViewLikeTextField(textView: UITextView) {
-        textView.layer.borderColor = UIColor(red: 215.0 / 255.0, green: 215.0 / 255.0, blue: 215.0 / 255.0, alpha: 1).CGColor
-        textView.layer.borderWidth = 0.6
-        textView.layer.cornerRadius = 6.0
+        //textView.layer.borderColor = UIColor(red: 215.0 / 255.0, green: 215.0 / 255.0, blue: 215.0 / 255.0, alpha: 1).CGColor
+        textView.layer.borderColor = UIColor.grayColor().CGColor
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 5
         textView.layer.masksToBounds = true
     }
-
+    
+    // Name: textFieldDidChange
+    // Inputs: None
+    // Outputs: None
+    // Function: Adds a '$' to the front of the jobOfferTextField if user inputs text
+    func changeToMoneyString(textField: UITextField) {
+        if !(textField.text!.hasPrefix("$")) {
+            textField.text = "$\(textField.text!)"
+        } else {
+            if (textField.text!.hasSuffix("$")) {
+                textField.text = ""
+            }
+        }
+    }
+    
+    // Name: animateTextField
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Custom function for pushing textFields up when editting
+    func animateTextField(textField: UITextField, up: Bool) {
+        let movementDistance:CGFloat = -150
+        let movementDuration: Double = 0.3
+        
+        var movement:CGFloat = 0
+        if up {
+            movement = movementDistance
+        }
+        else {
+            movement = -movementDistance
+        }
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        self.view.frame = CGRectOffset(self.view.frame, 0, movement)
+        UIView.commitAnimations()
+    }
+    
+    func setInputTextFieldLayers(textField: UITextField) {
+        textField.borderStyle = .Line
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.grayColor().CGColor
+        textField.layer.cornerRadius = 5
+    }
+    
+    
 }

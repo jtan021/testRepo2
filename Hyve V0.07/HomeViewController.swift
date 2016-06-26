@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 import THLabel
 
-class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDelegate {
+class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UITextFieldDelegate {
     /*
      *
      * CONSTANTS
@@ -21,15 +21,29 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     private let _mainSearchViewModel = MainSearchViewModel()
     private let _searchLocationAddressViewModel = SearchLocationAddressViewModel()
     private let _requestCategoryViewModel = RequestCategoryViewModel()
-    var geoCoder: CLGeocoder?
-    let locationManager = CLLocationManager()
-    
+    var _geoCoder: CLGeocoder?
+    let _locationManager = CLLocationManager()
+    var _categoryPickerView = UIPickerView()
+    var _datePickerView = UIPickerView()
+    var _selectedDay:Int = 0
+    var _selectedHour: Int = 0
+    var _selectedMinute: Int = 0
+    var _hourArray = [AnyObject]()
+    var _minuteArray = [AnyObject]()
+    var _dayArray = [AnyObject]()
+    var _screenWidth: CGFloat?
+    var _screenRect:CGRect = UIScreen.mainScreen().bounds
+    var _pickerStringVal: String = String()
+    var PLACEHOLDER_TEXT = "Let others know more specifics about what you need done here."
+    var SELECTACATEGORY_TEXT = "Select a Category"
+    var JOBREQUEST_TEXT = "Job Request"
     /*
      *
      * OUTLETS
      * section
      *
      */
+    // Search & Category outlets
     @IBOutlet weak var _searchTextField: SearchTextField!
     @IBOutlet weak var _searchHYVETextField: SearchTextField!
     @IBOutlet weak var _mapView: MKMapView!
@@ -40,10 +54,21 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var _searchLocationAddressTableView: UITableView!
     @IBOutlet weak var _searchNavigationBarView: UIView!
     @IBOutlet weak var _searchNavigationBarViewOriginY: NSLayoutConstraint!
+    // HYVE navigation bar outlets
     @IBOutlet weak var _hyveNavigationBarLabel: THLabel!
     @IBOutlet weak var _hyveNavigationBarView: UIView!
+    // General navigation bar outlets
     @IBOutlet weak var _generalNavigationBarView: UIView!
     @IBOutlet weak var _generalNavigationBarLabel: UILabel!
+    // Job request outlets
+    @IBOutlet weak var _jobRequestView: UIView!
+    @IBOutlet weak var _jobAddressTextView: UITextView!
+    @IBOutlet weak var _jobDescriptionTextView: UITextView!
+    @IBOutlet weak var _jobTitleTextField: UITextField!
+    @IBOutlet weak var _jobCategoryTextField: UITextField!
+    @IBOutlet weak var _jobLifetimeTextField: UITextField!
+    @IBOutlet weak var _jobOfferForCompletionTextField: UITextField!
+    @IBOutlet weak var _jobKeywordsTextField: UITextField!
     
     /*
      *
@@ -82,11 +107,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self._requestCategoryTableView.hidden = false
 
         // Replace _generalNavigationBarLabel text with "Select a Category"
-        self._generalNavigationBarLabel.text = "Select a Category"
+        self._generalNavigationBarLabel.text = SELECTACATEGORY_TEXT
     }
 
     @IBAction func GeneralNavigationViewReturnDidTouch(sender: AnyObject) {
-        if(self._generalNavigationBarLabel.text == "Select a Category") {
+        if(self._generalNavigationBarLabel.text == SELECTACATEGORY_TEXT) {
             // Hide _generalNavigationBarView & _requestCategoryTableView
             self._generalNavigationBarView.hidden = true
             self._requestCategoryTableView.hidden = true
@@ -94,12 +119,26 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             // Unhide _hyveNavigationBarView & _searchNavigationBarView
             self._hyveNavigationBarView.hidden = false
             self._searchNavigationBarView.hidden = false
+        } else if (self._generalNavigationBarLabel.text == JOBREQUEST_TEXT) {
+            // Set _generalNavigationBarLabel to "Select a Category"
+            self._generalNavigationBarLabel.text = SELECTACATEGORY_TEXT
+            
+            // Unhide _requestCategoryTableView
+            self._requestCategoryTableView.hidden = false
+            
+            // Hide _jobRequestView
+            self._jobRequestView.hidden = true
+            
         }
     }
     
     @IBAction func ResetMapDidTouch(sender: AnyObject) {
         self._resetMapButton.setBackgroundColor(colorWithHexString("E5B924"), forState: UIControlState.Highlighted)
         self._mapView.setCenterCoordinate(self._mapView.userLocation.coordinate, animated: true)
+    }
+    
+    @IBAction func PostJobDidTouch(sender: AnyObject) {
+        // Do post
     }
     
     /*
@@ -117,19 +156,21 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.setupHyveTHLabel(_hyveNavigationBarLabel)
         
         // Bind ViewController to SearchLocationViewModel
-        _searchLocationAddressTableView.delegate = self
-        _searchLocationAddressViewModel._mapView = _mapView
+        self._searchLocationAddressTableView.delegate = self
+        self._searchLocationAddressViewModel._mapView = _mapView
         self.BindSearchLocationAddressViewModel()
         
-        // Bind ViewController to RequestCategoryViewModel
+        // Bind ViewController to RequestCategoryViewModel & hide _requestCategoryTableView
         self.BindRequestCategoryViewModel()
+        self._requestCategoryTableView.delegate = self
+        self._requestCategoryTableView.hidden = true
 
         // Zoom Map View into Current Location
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
-        geoCoder = CLGeocoder()
+        self._locationManager.delegate = self
+        self._locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self._locationManager.requestWhenInUseAuthorization()
+        self._locationManager.requestLocation()
+        _geoCoder = CLGeocoder()
         self._mapView!.delegate = self
         
         // Detect if user panned through mapView
@@ -137,10 +178,81 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         panRecognizer.delegate = self
         self._mapView.addGestureRecognizer(panRecognizer)
         
-        ///
-        ///
-        ///
-        self._requestCategoryTableView.hidden = true
+        // Hide keyboard when users tap outside editable area
+        let tapper = UITapGestureRecognizer(target: view, action:#selector(UIView.endEditing))
+        tapper.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapper)
+        
+        // Setup job request view
+        // 1) Hide _jobRequestView
+        self._jobRequestView.hidden = true
+        // 2) Set _screenWidth var
+        self._screenWidth = self._screenRect.size.width
+        // 3) Setup keyboard for _jobCategoryTextField to _categoryPickerView
+        self._categoryPickerView.backgroundColor = .whiteColor()
+        self._categoryPickerView.showsSelectionIndicator = true
+        self._categoryPickerView.dataSource = self
+        self._categoryPickerView.delegate = self
+        self._jobCategoryTextField.inputView = _categoryPickerView
+        // 4) Setup keyboard for _jobLifetimeTextfield to _datePickerView
+        self._datePickerView.backgroundColor = .whiteColor()
+        self._datePickerView.showsSelectionIndicator = true
+        self._datePickerView.dataSource = self
+        self._datePickerView.delegate = self
+        
+        // Populate hour,day,minutes array
+        for i in 0...59 {
+            _pickerStringVal = "\(i)"
+            //Creates day array with 0-13 days
+            if (i < 14) {
+                _dayArray.append(_pickerStringVal)
+                //Creates hour array with 0-23 hours
+            }
+            if (i < 24) {
+                _hourArray.append(_pickerStringVal)
+                //Sets minute array with 0-59 minutes
+            }
+            _minuteArray.append(_pickerStringVal)
+        }
+        
+        self._jobLifetimeTextField.inputView = _datePickerView
+        // 5) Setup keyboard for _jobOfferForCompletionTextfield  to DecimalPad
+        self._jobOfferForCompletionTextField.keyboardType = UIKeyboardType.DecimalPad
+        self._jobOfferForCompletionTextField.addTarget(self, action: "changeToMoneyString:", forControlEvents: UIControlEvents.EditingChanged)
+        // 6) Create "Done" button for _jobOfferForCompletionTextField, _jobLifetimeTextField, and _jobCategoryTextField keyboards and set returnkey for other job input textfields to done
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.Default
+        toolBar.setBackgroundImage(UIImage(named: "Hyve_BG2"), forToolbarPosition: .Any, barMetrics: .Default)
+        toolBar.translucent = false
+        toolBar.tintColor = colorWithHexString("E5B924")
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Bordered, target: self, action: #selector(DismissKeyboard))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.userInteractionEnabled = true
+        self._jobCategoryTextField.inputAccessoryView = toolBar
+        self._jobOfferForCompletionTextField.inputAccessoryView = toolBar
+        self._jobLifetimeTextField.inputAccessoryView = toolBar
+        self._jobTitleTextField.returnKeyType = UIReturnKeyType.Done
+        self._jobKeywordsTextField.returnKeyType = UIReturnKeyType.Done
+        // 7) Set _jobAddressTextView & _jobDescriptionTextView to look like TextField and add placeholder text to description textview
+        self.TextViewLikeTextField(self._jobAddressTextView)
+        self.TextViewLikeTextField(self._jobDescriptionTextView)
+        self._jobDescriptionTextView.delegate = self
+        self._jobDescriptionTextView.text = PLACEHOLDER_TEXT
+        self._jobDescriptionTextView.textColor = UIColor.lightGrayColor()
+        // 8) Set job input textfield delegates
+        self._jobTitleTextField.delegate = self
+        self._jobCategoryTextField.delegate = self
+        self._jobOfferForCompletionTextField.delegate = self
+        self._jobKeywordsTextField.delegate = self
+        self._jobLifetimeTextField.delegate = self
+        // 9) Setup input textfield layers
+        self.setInputTextFieldLayers(_jobTitleTextField)
+        self.setInputTextFieldLayers(_jobCategoryTextField)
+        self.setInputTextFieldLayers(_jobOfferForCompletionTextField)
+        self.setInputTextFieldLayers(_jobKeywordsTextField)
+        self.setInputTextFieldLayers(_jobLifetimeTextField)
     }
     
     /*
@@ -245,8 +357,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     // Outputs: ...
     // Function: reverseGeocodes the current location and updates the _searchLocationAddressTextField.text address
     func geoCode(location : CLLocation!) {
-        geoCoder!.cancelGeocode()
-        geoCoder!.reverseGeocodeLocation(location, completionHandler: { (data, error) -> Void in
+        self._geoCoder!.cancelGeocode()
+        self._geoCoder!.reverseGeocodeLocation(location, completionHandler: { (data, error) -> Void in
             guard let placeMarks = data as [CLPlacemark]! else {
                 return
             }
@@ -272,26 +384,224 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             self._searchLocationAddressTextField.resignFirstResponder()
             // Else setup selection for job request categories
         } else {
-//            print("selected")
-//            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//            self.requestView.hidden = false
-//            
-//            // Set and show navigation bar title
-//            self.requestNavBarLabel.text = "Request a Job"
-//            self.requestNavBarView.hidden = false
-//            // Make sure requestPostButton is not hidden
-//            self.requestPostButton.hidden = false
-//            
-//            // Hide jobMenuView
-//            self.jobMenuView.hidden = true
-//            
-//            // Set jobMenuView defaults
-//            self.categoryTF.text = self.jobMenuArray[indexPath.row].menuTitle
-//            self.offerTF.placeholder = "$0.00"
-//            self.lifetimeTF.text = "0 Days, 0 Hours, 0 Minutes"
-//            self.addressTV.text = self.searchViewLocationSearchTF.text
+            print("selected")
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            // Set _generalNavigationBarLabel to "Job Request"
+            self._generalNavigationBarLabel.text = JOBREQUEST_TEXT
+            
+            // Set _jobMenuView defaults
+            self._jobCategoryTextField.text = self._requestCategoryViewModel._requestCategoryTableData[indexPath.row].Title
+            self._jobOfferForCompletionTextField.placeholder = "$0.00"
+            self._jobLifetimeTextField.text = "0 Days, 0 Hours, 0 Minutes"
+            self._jobAddressTextView.text = self._searchLocationAddressTextField.text
+            
+            // Hide _requestCategoryTableView and show _jobRequestView
+            self._requestCategoryTableView.hidden = true
+            self._jobRequestView.hidden = false
         }
     }
-
+    
+    // Name: numberOfComponentsInPickerView
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Sets the number of components in the pickerview
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        if(pickerView == _datePickerView) {
+            return 6
+        } else if (pickerView == _categoryPickerView) {
+            return 1
+        }
+        return 1
+    }
+    
+    // Name: pickerView
+    // Inputs: None
+    // Outputs: None
+    // Function: Sets variables: day, hour, minute, and updates the jobLifeTextField with user selection
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if(pickerView == self._datePickerView) {
+            switch component {
+            case 0:
+                self._selectedDay = row
+            case 2:
+                self._selectedHour = row
+            case 4:
+                self._selectedMinute = row
+            default:
+                print("No component with number \(component)")
+            }
+            if (_selectedDay > 1) {
+                self._jobLifetimeTextField.text = "\(_selectedDay) Days"
+            } else {
+                self._jobLifetimeTextField.text = "\(_selectedDay) Day"
+            }
+            
+            if (_selectedHour > 1) {
+                self._jobLifetimeTextField.text = "\(self._jobLifetimeTextField.text!), \(_selectedHour) Hours"
+            } else {
+                self._jobLifetimeTextField.text = "\(self._jobLifetimeTextField.text!), \(_selectedHour) Hour"
+            }
+            
+            if (_selectedMinute > 1) {
+                self._jobLifetimeTextField.text = "\(self._jobLifetimeTextField.text!), \(_selectedMinute) Minutes."
+            } else {
+                self._jobLifetimeTextField.text = "\(self._jobLifetimeTextField.text!), \(_selectedMinute) Minute."
+            }
+        } else if(pickerView == self._categoryPickerView) {
+            self._jobCategoryTextField.text = self._requestCategoryViewModel._requestCategoryTableData[row].Title
+        }
+    }
+    
+    // Name: pickerView -- numberOfRowsInComponent
+    // Inputs: None
+    // Outputs: None
+    // Function: Sets the number of choices in each component of the pickerView
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if(pickerView == self._datePickerView) {
+            if component == 0 {
+                return _dayArray.count
+            } else if component == 2 {
+                return _hourArray.count
+            } else if component == 4 {
+                return _minuteArray.count
+            } else {
+                return 1
+            }
+        } else if (pickerView == self._categoryPickerView) {
+            return self._requestCategoryViewModel._requestCategoryTableData.count
+        } else {
+            return 1
+        }
+    }
+    
+    // Name: pickerView -- titleForRow
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Sets the title of rows in pickerViews
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if(pickerView == self._categoryPickerView) {
+            return self._requestCategoryViewModel._requestCategoryTableData[row].Title
+        } else {
+            return "\(row)"
+        }
+    }
+    
+    // Name: pickerView -- viewForRow
+    // Inputs: None
+    // Outputs: None
+    // Function: Populates the keyboard pickerViews with required fields.
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        if pickerView == _datePickerView {
+            let columnView = UILabel(frame: CGRectMake(30, 0, _screenWidth!/6 - 15, 30))
+            let columnViewNum = UILabel(frame: CGRectMake(30, 0, 20, 30))
+            if(component == 1) {
+                columnView.text = "Day"
+            } else if(component == 3) {
+                columnView.text = "Hour"
+            } else if(component == 5) {
+                columnView.text = "Min"
+            } else {
+                columnView.text = "\(row)"
+                columnView.textAlignment = NSTextAlignment.Center
+            }
+            return columnView
+        } else if pickerView == _categoryPickerView {
+            let columnView = UILabel(frame: CGRectMake(30, 0, _screenWidth! - 30, 30))
+            columnView.text = self._requestCategoryViewModel._requestCategoryTableData[row].Title
+            columnView.textAlignment = NSTextAlignment.Center
+            return columnView
+        }
+        return view!
+    }
+    
+    // Name: textViewDidBeginEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: If user edits textview, check textColor to make sure the color is returned to black
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textView.textColor == UIColor.lightGrayColor() {
+            textView.text = nil
+            textView.textColor = UIColor.blackColor()
+        }
+    }
+    
+    // Name: textViewDidChange
+    // Inputs: ...
+    // Outputs: ...
+    // Function: If textView is changed and cleared, update it with placeholder text
+    func textViewDidChange(textView: UITextView) {
+        if textView.textColor == UIColor.lightGrayColor() {
+            textView.text = nil
+            textView.textColor = UIColor.blackColor()
+        }
+        if (textView.text.isEmpty) {
+            textView.textColor = UIColor.lightGrayColor()
+            textView.text = self.PLACEHOLDER_TEXT
+        }
+    }
+    
+    // Name: textViewDidEndEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: If user finished editing the textView, check if empty. If yes, update it with placeholder text.
+    func textViewDidEndEditing(textView: UITextView) {
+        if (textView.text.isEmpty) {
+            textView.textColor = UIColor.lightGrayColor()
+            textView.text = self.PLACEHOLDER_TEXT
+        }
+    }
+    
+    // Name: textFieldDidBeginEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Push view up if textField == offerTF || keyTF is edited
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if(textField == self._jobOfferForCompletionTextField || textField == self._jobKeywordsTextField) {
+            self.animateTextField(textField, up:true)
+        }
+    }
+    
+    // Name: textFieldDidEndEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Push view down if textfield == offerTF || keyTF is finished editing
+    func textFieldDidEndEditing(textField: UITextField) {
+        if(textField == self._jobOfferForCompletionTextField || textField == self._jobKeywordsTextField) {
+            self.animateTextField(textField, up:false)
+        }
+    }
+    
+    // Name: textField -- shouldChangeCharactersInRange
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Stops accepting user input for textField under circumstances
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if(textField == self._jobOfferForCompletionTextField) {
+            let newString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as? NSString
+            var arrayOfString: [AnyObject] = newString!.componentsSeparatedByString(".")
+            // Check if there are more than 1 decimal points
+            if arrayOfString.count > 2 {
+                return false
+            }
+            // Check for more than 2 chars after the decimal point
+            if (arrayOfString.count > 1)
+            {
+                let decimalAmount:NSString = arrayOfString[1] as! String
+                if(decimalAmount.length > 2) {
+                    return false
+                }
+            }
+            // Check for an absurdly large amount
+            if (arrayOfString.count > 0)
+            {
+                let dollarAmount:NSString = arrayOfString[0] as! String
+                if (dollarAmount.length > 8) {
+                    return false
+                }
+            }
+            return true
+        }
+        return true
+    }
 
 }
