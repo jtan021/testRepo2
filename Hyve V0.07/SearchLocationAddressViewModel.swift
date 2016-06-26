@@ -18,6 +18,7 @@ class SearchLocationAddressViewModel {
      *
      */
     let _searchLocationAddress = Observable<String?>("")
+    let _searchDidBegin = Observable<Bool>(false)
     let _searchLocationAddressResults = ObservableArray<MKMapItem>()
     var _mapView:MKMapView?
     
@@ -56,6 +57,10 @@ class SearchLocationAddressViewModel {
                 print(text!)
                 self.executeLocationSearch(text!)
             }
+        
+        _searchLocationAddress
+            .map { $0!.characters.count > 0 }
+            .bindTo(_searchDidBegin)
     }
     
     func executeLocationSearch(text: String) {

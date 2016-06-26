@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import THLabel
 
 extension UIViewController {
     // Name: displayAlert
@@ -64,6 +65,14 @@ extension UIViewController {
         return addressLine
     }
     
+    // Name: locationManager
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Managers errors with locationManager
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error: " + error.localizedDescription)
+    }
+    
     // Name: newLocationZoomIn
     // Input: placemark: MKPlacemark, mapView: MKMapView
     // Output: ...
@@ -72,6 +81,62 @@ extension UIViewController {
         mapView.centerCoordinate = placemark.coordinate
         let reg = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 1500, 1500)
         mapView.setRegion(reg, animated: true)
+    }
+    
+    // Name: setupHYVETHLabel
+    // Input: hyveLabel: THLabel
+    // Output: ...
+    // Function: Sets up passed in THLabel with preset Title constants
+    func setupHyveTHLabel(hyveLabel: THLabel) {
+        hyveLabel.shadowColor = Constants.kShadowColor2
+        hyveLabel.shadowOffset = Constants.kShadowOffset
+        hyveLabel.shadowBlur = Constants.kShadowBlur
+        hyveLabel.innerShadowColor = Constants.kShadowColor2
+        hyveLabel.innerShadowOffset = Constants.kInnerShadowOffset
+        hyveLabel.innerShadowBlur = Constants.kInnerShadowBlur
+        hyveLabel.strokeColor = Constants.kStrokeColor
+        hyveLabel.strokeSize = Constants.kStrokeSize
+        hyveLabel.gradientStartColor = Constants.kGradientStartColor
+        hyveLabel.gradientEndColor = Constants.kGradientEndColor
+    }
+    
+    // Name: colorWithHexString
+    // Input: hex: String
+    // Output: UIColor
+    // Function: Transforms hex string to UIColor equivalent
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = (cString as NSString).substringFromIndex(1)
+        }
+        
+        if (cString.characters.count != 6) {
+            return UIColor.grayColor()
+        }
+        
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
+        
+        
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+    
+    // Name: TextViewLikeTextField
+    // Input: textView: UITextView
+    // Output: ...
+    // Function: Transforms textView's layers to appear similar to a TextField
+    func TextViewLikeTextField(textView: UITextView) {
+        textView.layer.borderColor = UIColor(red: 215.0 / 255.0, green: 215.0 / 255.0, blue: 215.0 / 255.0, alpha: 1).CGColor
+        textView.layer.borderWidth = 0.6
+        textView.layer.cornerRadius = 6.0
+        textView.layer.masksToBounds = true
     }
 
 }

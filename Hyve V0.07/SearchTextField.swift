@@ -10,7 +10,7 @@ import UIKit
 
 class SearchTextField: UITextField {
         
-    let inset: CGFloat = 37
+    let inset: CGFloat = 35
     
     // placeholder position
     override func textRectForBounds(bounds: CGRect) -> CGRect {

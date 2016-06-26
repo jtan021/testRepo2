@@ -170,17 +170,8 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
         self._viewToDim.hidden = true
         self._registrationView.hidden = true
         
-        // Customize THLabels (HYVELabel & HYVERegistrationLabel)
-        self._hyveLabel.shadowColor = Constants.kShadowColor2
-        self._hyveLabel.shadowOffset = Constants.kShadowOffset
-        self._hyveLabel.shadowBlur = Constants.kShadowBlur
-        self._hyveLabel.innerShadowColor = Constants.kShadowColor2
-        self._hyveLabel.innerShadowOffset = Constants.kInnerShadowOffset
-        self._hyveLabel.innerShadowBlur = Constants.kInnerShadowBlur
-        self._hyveLabel.strokeColor = Constants.kStrokeColor
-        self._hyveLabel.strokeSize = Constants.kStrokeSize
-        self._hyveLabel.gradientStartColor = Constants.kGradientStartColor
-        self._hyveLabel.gradientEndColor = Constants.kGradientEndColor
+        // Customize THLabels (HYVELabel)
+        self.setupHyveTHLabel(_hyveLabel)
         
 //        self._hyveRegistrationLabel.shadowColor = Constants.kShadowColor2
 //        self._hyveRegistrationLabel.shadowOffset = Constants.kShadowOffset

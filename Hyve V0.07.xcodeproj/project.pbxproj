@@ -41,6 +41,8 @@
 		16C2E3D51D1A53B800321A56 /* Hyve_V0_07Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3D41D1A53B800321A56 /* Hyve_V0_07Tests.swift */; };
 		16C2E3E01D1A53B800321A56 /* Hyve_V0_07UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */; };
 		16C2E3EE1D1A565400321A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3ED1D1A565400321A56 /* Assets.xcassets */; };
+		16EB59E01D1F29A9006988FD /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EB59DF1D1F29A9006988FD /* MainSearchViewModel.swift */; };
+		16EB59E21D1F4E0F006988FD /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EB59E11D1F4E0F006988FD /* UIButtonExtensions.swift */; };
 		16F599AD1D1BA3C100709978 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F599AC1D1BA3C100709978 /* MapKit.framework */; };
 		21A35A962D2D50AC1AC13896 /* Pods_Hyve_V0_07Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F71EBCAA1DEB793BFDE465 /* Pods_Hyve_V0_07Tests.framework */; };
 		8616C6E25097A365C17A3828 /* Pods_Hyve_V0_07.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1970969A003612236E164 /* Pods_Hyve_V0_07.framework */; };
@@ -108,6 +110,8 @@
 		16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyve_V0_07UITests.swift; sourceTree = "<group>"; };
 		16C2E3E11D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16C2E3ED1D1A565400321A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		16EB59DF1D1F29A9006988FD /* MainSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
+		16EB59E11D1F4E0F006988FD /* UIButtonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		16F599AC1D1BA3C100709978 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		48349CF6F1BD2D37184E994F /* Pods-Hyve V0.07UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07UITests/Pods-Hyve V0.07UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6D3083E09098B448654A9A55 /* Pods-Hyve V0.07.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07/Pods-Hyve V0.07.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		169871AC1D1CB363002116DE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				16EB59DF1D1F29A9006988FD /* MainSearchViewModel.swift */,
 				169871DC1D1CC604002116DE /* SearchLocationAddressViewModel.swift */,
 				169871E01D1CD75F002116DE /* RequestCategoryViewModel.swift */,
 			);
@@ -180,6 +185,7 @@
 				169871DE1D1CCB47002116DE /* UIStoryboardExtensions.swift */,
 				169871E21D1CDB89002116DE /* RequestCategoryCell.swift */,
 				169871E41D1D9323002116DE /* SearchTextField.swift */,
+				16EB59E11D1F4E0F006988FD /* UIButtonExtensions.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -557,6 +563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16EB59E21D1F4E0F006988FD /* UIButtonExtensions.swift in Sources */,
 				16C2E3C21D1A53B800321A56 /* SecondViewController.swift in Sources */,
 				169871DD1D1CC604002116DE /* SearchLocationAddressViewModel.swift in Sources */,
 				16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */,
@@ -570,6 +577,7 @@
 				169871DF1D1CCB47002116DE /* UIStoryboardExtensions.swift in Sources */,
 				169871B61D1CB6F1002116DE /* UIViewControllerExtensions.swift in Sources */,
 				169871E51D1D9323002116DE /* SearchTextField.swift in Sources */,
+				16EB59E01D1F29A9006988FD /* MainSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
