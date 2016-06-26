@@ -10,6 +10,7 @@ import Bond
 import UIKit
 import MapKit
 import THLabel
+import Parse
 
 class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UITextFieldDelegate {
     /*
@@ -34,9 +35,13 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var _screenWidth: CGFloat?
     var _screenRect:CGRect = UIScreen.mainScreen().bounds
     var _pickerStringVal: String = String()
+    var _currentUser = PFUser.currentUser()
     var PLACEHOLDER_TEXT = "Let others know more specifics about what you need done here."
     var SELECTACATEGORY_TEXT = "Select a Category"
     var JOBREQUEST_TEXT = "Job Request"
+    var POSTBUTTON_TEXT = " Post"
+    var VERIFYPOSTBUTTON_TEXT = " Verify"
+    
     /*
      *
      * OUTLETS
@@ -69,6 +74,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var _jobLifetimeTextField: UITextField!
     @IBOutlet weak var _jobOfferForCompletionTextField: UITextField!
     @IBOutlet weak var _jobKeywordsTextField: UITextField!
+    @IBOutlet weak var _postJobButton: UIButton!
     
     /*
      *
@@ -138,7 +144,71 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     @IBAction func PostJobDidTouch(sender: AnyObject) {
-        // Do post
+        // 1) Check that all required fields (title & description) are filled in
+        if(self._jobTitleTextField.text == "" || self._jobDescriptionTextView.text == "") {
+            self.displayAlert("Missing field(s)", message: "Help others understand what you need done by providing a nice title and description.")
+            return
+        }
+        // 2) Check that lifetime > 0
+        if(self._selectedDay + self._selectedHour + self._selectedMinute == 0) {
+            self.displayAlert("Invalid Request Lifetime", message: "Please increase the lifetime of your request so more people have the chance to see it.")
+            return
+        }
+        // 3) If button == "Post", switch to "Verify"
+        if (self._postJobButton.titleLabel?.text == POSTBUTTON_TEXT) {
+            self._postJobButton.setTitle(self.VERIFYPOSTBUTTON_TEXT, forState: .Normal)
+            self._postJobButton.setImage(UIImage(named: "verifyPost"), forState: UIControlState.Normal)
+        }
+        // 4) If button == "Verify", do Post
+        else if (self._postJobButton.titleLabel?.text == VERIFYPOSTBUTTON_TEXT) {
+            // do post
+            // 1) Verify user
+            if _currentUser != nil {
+                // 2) Save the request in "JobRequest"
+                let username = _currentUser!.username!
+                let firstName = _currentUser!["firstName"] as! String
+                let lastName = _currentUser!["lastName"] as! String
+                let fullName = firstName + " " + lastName
+                let totalTimeInMinutes = (_selectedDay*24*60 + _selectedHour*60 + _selectedMinute)
+                let currentDate = self.getUTCfromLocalDate(self.getDate())
+                
+                let newRequest = PFObject(className: "JobRequest")
+                print(username)
+                newRequest["username"] = _currentUser!.username!
+                newRequest["fullName"] = fullName
+                newRequest["jobTitle"] = self._jobTitleTextField.text
+                newRequest["jobAddress"] = self._jobAddressTextView.text
+                newRequest["jobCategory"] = self._jobCategoryTextField.text
+                newRequest["jobDescription"] = self._jobDescriptionTextView.text
+                newRequest["jobLifetime"] = totalTimeInMinutes
+                newRequest["jobOfferForCompletion"] = self._jobOfferForCompletionTextField.text
+                newRequest["jobKeywords"] = self._jobKeywordsTextField.text
+                newRequest["jobStatus"] = "Active"
+                newRequest["jobCompleted"] = false
+                newRequest["jobLastUpdated"] = currentDate
+                newRequest["jobEmployee"] = ""
+                
+                newRequest.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        print(currentDate)
+                        print(self.getDate())
+                        print("Request successfully saved to Parse db.\n")
+                        self.displayAlert("Request successfuly saved", message: "Your request \(self._jobTitleTextField.text!) has been added to the Hyve.")
+                        
+                        // Hide _jobRequestView and the _generalNavigationBarView
+                        self._jobRequestView.hidden = true
+                        self._generalNavigationBarView.hidden = true
+                        
+                        // Show the _hyveNavigationBarView
+                        self._hyveNavigationBarView.hidden = false
+                        
+                    } else {
+                        self.displayAlert("Request could not be saved", message: "Please try again later.")
+                        print("Error saving request: \(error!) \(error!.description)")
+                    }
+                }
+            }
+        }
     }
     
     /*
@@ -253,6 +323,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.setInputTextFieldLayers(_jobOfferForCompletionTextField)
         self.setInputTextFieldLayers(_jobKeywordsTextField)
         self.setInputTextFieldLayers(_jobLifetimeTextField)
+        // 10) Add observers to input textfields to check for textchange and change _postButton accordingly
+        self._jobTitleTextField.addTarget(self, action: #selector(HomeViewController.jobInputTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        self._jobCategoryTextField.addTarget(self, action: #selector(HomeViewController.jobInputPickerViewsDidChange(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        self._jobLifetimeTextField.addTarget(self, action: #selector(HomeViewController.jobInputPickerViewsDidChange(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
+        self._jobOfferForCompletionTextField.addTarget(self, action: #selector(HomeViewController.jobInputTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        self._jobKeywordsTextField.addTarget(self, action: #selector(HomeViewController.jobInputTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
     }
     
     /*
@@ -265,8 +341,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     // Inputs: ...
     // Outputs: ...
     // Function:
-    func BindMainSearchViewModel() {
-
+    func BindMainSearchViewModel(textField: UITextField) {
+        print("BOOM")
     }
     
     // Name: BindSearchLocationAddressViewModel()
@@ -391,9 +467,21 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             // Set _jobMenuView defaults
             self._jobCategoryTextField.text = self._requestCategoryViewModel._requestCategoryTableData[indexPath.row].Title
-            self._jobOfferForCompletionTextField.placeholder = "$0.00"
-            self._jobLifetimeTextField.text = "0 Days, 0 Hours, 0 Minutes"
-            self._jobAddressTextView.text = self._searchLocationAddressTextField.text
+            
+            if(self._jobOfferForCompletionTextField.text != "$0.00") {
+                self._jobOfferForCompletionTextField.text = "$0.00"
+            }
+            if(self._jobLifetimeTextField.text != "0 Days, 0 Hours, 0 Minutes") {
+                self._jobLifetimeTextField.text = "0 Days, 0 Hours, 0 Minutes"
+            }
+            if(self._jobAddressTextView.text != self._searchLocationAddressTextField.text) {
+                self._jobAddressTextView.text = self._searchLocationAddressTextField.text
+            }
+            if(self._postJobButton.titleLabel?.text != POSTBUTTON_TEXT) {
+                self._postJobButton.setTitle(self.POSTBUTTON_TEXT, forState: .Normal)
+                self._postJobButton.setImage(UIImage(named: "post"), forState: UIControlState.Normal)
+            }
+            
             
             // Hide _requestCategoryTableView and show _jobRequestView
             self._requestCategoryTableView.hidden = true
@@ -538,6 +626,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             textView.textColor = UIColor.lightGrayColor()
             textView.text = self.PLACEHOLDER_TEXT
         }
+        
+        if(self._postJobButton.titleLabel?.text != POSTBUTTON_TEXT) {
+            self._postJobButton.setTitle(self.POSTBUTTON_TEXT, forState: .Normal)
+            self._postJobButton.setImage(UIImage(named: "post"), forState: UIControlState.Normal)
+        }
     }
     
     // Name: textViewDidEndEditing
@@ -568,6 +661,28 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     func textFieldDidEndEditing(textField: UITextField) {
         if(textField == self._jobOfferForCompletionTextField || textField == self._jobKeywordsTextField) {
             self.animateTextField(textField, up:false)
+        }
+    }
+    
+    // Name: jobInputTextFieldDidChange
+    // Inputs: ...
+    // Outputs: ...
+    // Function: If any input textfields were changed, make sure the Post button reset and is not "Verify"
+    func jobInputTextFieldDidChange(textField: UITextField) {
+        if(self._postJobButton.titleLabel?.text != POSTBUTTON_TEXT) {
+            self._postJobButton.setTitle(self.POSTBUTTON_TEXT, forState: .Normal)
+            self._postJobButton.setImage(UIImage(named: "post"), forState: UIControlState.Normal)
+        }
+    }
+    
+    // Name: jobInputPickerViewsDidChange
+    // Inputs: ...
+    // Outputs: ...
+    // Function: If any input textfields with pickerview keyboards were changed, make sure the Post button reset and is not "Verify"
+    func jobInputPickerViewsDidChange(textField: UITextField) {
+        if(self._postJobButton.titleLabel?.text != POSTBUTTON_TEXT) {
+            self._postJobButton.setTitle(self.POSTBUTTON_TEXT, forState: .Normal)
+            self._postJobButton.setImage(UIImage(named: "post"), forState: UIControlState.Normal)
         }
     }
     

@@ -183,5 +183,31 @@ extension UIViewController {
         textField.layer.cornerRadius = 5
     }
     
+    // Name: getUTCFromLocalDate
+    // Inputs: strDate: String
+    // Outputs: String
+    // Function: Take an input string which is the local date and convert it to UTC time
+    func getUTCfromLocalDate(strDate: String) -> String {
+        let dateFormat: NSDateFormatter = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormat.timeZone = NSTimeZone.systemTimeZone()
+        let aDate: NSDate = dateFormat.dateFromString(strDate)!
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormat.timeZone = NSTimeZone(name: "UTC")
+        return dateFormat.stringFromDate(aDate)
+    }
+    
+    // Name: getDate
+    // Inputs: None
+    // Outputs: String
+    // Function: Gets current date and output in format yyyy-MM-dd HH:mm:ss
+    func getDate() -> String {
+        let currentDate = NSDate()
+        let dateFormat: NSDateFormatter = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let convertedDate = dateFormat.stringFromDate(currentDate)
+        return convertedDate
+    }
+    
     
 }
