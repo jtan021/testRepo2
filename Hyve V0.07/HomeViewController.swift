@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var _screenRect:CGRect = UIScreen.mainScreen().bounds
     var _pickerStringVal: String = String()
     var _currentUser = PFUser.currentUser()
+    var _didStartPanMap:Bool = false
     var PLACEHOLDER_TEXT = "Let others know more specifics about what you need done here."
     var SELECTACATEGORY_TEXT = "Select a Category"
     var JOBREQUEST_TEXT = "Job Request"
@@ -52,6 +53,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var _searchTextField: SearchTextField!
     @IBOutlet weak var _searchHYVETextField: SearchTextField!
     @IBOutlet weak var _mapView: MKMapView!
+    @IBOutlet weak var _mapPinImageView: UIImageView!
     @IBOutlet weak var _switchSearchViewButton: UIButton!
     @IBOutlet weak var _resetMapButton: UIButton!
     @IBOutlet weak var _searchLocationAddressTextField: SearchTextField!
@@ -72,7 +74,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var _jobTitleTextField: UITextField!
     @IBOutlet weak var _jobCategoryTextField: UITextField!
     @IBOutlet weak var _jobLifetimeTextField: UITextField!
-    @IBOutlet weak var _jobOfferForCompletionTextField: UITextField!
+    @IBOutlet weak var _jobOfferForCompletionTextField: NoPasteTextField!
     @IBOutlet weak var _jobKeywordsTextField: UITextField!
     @IBOutlet weak var _postJobButton: UIButton!
     
@@ -193,7 +195,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                         print(currentDate)
                         print(self.getDate())
                         print("Request successfully saved to Parse db.\n")
-                        self.displayAlert("Request successfuly saved", message: "Your request \(self._jobTitleTextField.text!) has been added to the Hyve.")
+                        self.displayAlert("Request successfuly saved", message: "Your request \"\(self._jobTitleTextField.text!)\" has been added to the Hyve.")
                         
                         // Hide _jobRequestView and the _generalNavigationBarView
                         self._jobRequestView.hidden = true
@@ -244,7 +246,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self._mapView!.delegate = self
         
         // Detect if user panned through mapView
-        let panRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didDragMap:")
+        let panRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(HomeViewController.didDragMap(_:)))
         panRecognizer.delegate = self
         self._mapView.addGestureRecognizer(panRecognizer)
         
@@ -407,6 +409,32 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         return true
     }
     
+    
+    // Name: gestureRecognizer
+    // Inputs: None
+    // Outputs: None
+    // Function: Allows gestureRecognizers
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    // Name: didDragMap
+    // Inputs: gestureRecognizer
+    // Outputs: None
+    // Function: If gestureRecognizer returns true, user is panning the map so hide the postJobButton. If false or panning ends, unhide the postJobButton
+    func didDragMap(gestureRecognizer: UIGestureRecognizer) {
+        if(!self._didStartPanMap) {
+            print("pan start")
+            self._mapPinImageView.center.y -= 10
+            self._didStartPanMap = true
+        }
+        if gestureRecognizer.state == .Ended {
+            self._mapPinImageView.center.y += 10
+            self._didStartPanMap = false
+            print("panning ended")
+        }
+    }
+    
     // Name: locationManager
     // Inputs: ...
     // Outputs: ...
@@ -467,6 +495,18 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             // Set _jobMenuView defaults
             self._jobCategoryTextField.text = self._requestCategoryViewModel._requestCategoryTableData[indexPath.row].Title
+            
+            if(self._jobTitleTextField.text != "") {
+                self._jobTitleTextField.text = ""
+            }
+            
+            if(self._jobDescriptionTextView.text != "") {
+                self._jobDescriptionTextView.text = ""
+            }
+            
+            if(self._jobKeywordsTextField.text != "") {
+                self._jobKeywordsTextField.text = ""
+            }
             
             if(self._jobOfferForCompletionTextField.text != "$0.00") {
                 self._jobOfferForCompletionTextField.text = "$0.00"
@@ -715,6 +755,14 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 }
             }
             return true
+        }
+        if(textField == self._jobTitleTextField || textField == self._jobKeywordsTextField) {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 25
         }
         return true
     }
