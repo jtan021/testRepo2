@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160449EA1D21E1C900711BBB /* MyAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449E91D21E1C900711BBB /* MyAccountCell.swift */; };
+		160449EC1D21E22300711BBB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449EB1D21E22300711BBB /* MyAccountViewController.swift */; };
+		160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449ED1D21E23400711BBB /* MyAccountViewModel.swift */; };
+		160449F11D21E6BA00711BBB /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449F01D21E6BA00711BBB /* CurrentUser.swift */; };
 		169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */; };
 		169871B21D1CB437002116DE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B11D1CB437002116DE /* BaseView.swift */; };
 		169871B41D1CB5AC002116DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B31D1CB5AC002116DE /* Constants.swift */; };
@@ -33,7 +37,7 @@
 		169871E31D1CDB89002116DE /* RequestCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E21D1CDB89002116DE /* RequestCategoryCell.swift */; };
 		169871E51D1D9323002116DE /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E41D1D9323002116DE /* SearchTextField.swift */; };
 		16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */; };
-		16C2E3C01D1A53B800321A56 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */; };
+		16C2E3C01D1A53B800321A56 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BF1D1A53B800321A56 /* CompletedViewController.swift */; };
 		16C2E3C21D1A53B800321A56 /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3C11D1A53B800321A56 /* PendingViewController.swift */; };
 		16C2E3C51D1A53B800321A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C31D1A53B800321A56 /* Main.storyboard */; };
 		16C2E3CA1D1A53B800321A56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */; };
@@ -72,6 +76,10 @@
 /* Begin PBXFileReference section */
 		02F71EBCAA1DEB793BFDE465 /* Pods_Hyve_V0_07Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hyve_V0_07Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA05503E5B1C26BC25E5754 /* Pods-Hyve V0.07UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hyve V0.07UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hyve V0.07UITests/Pods-Hyve V0.07UITests.release.xcconfig"; sourceTree = "<group>"; };
+		160449E91D21E1C900711BBB /* MyAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountCell.swift; sourceTree = "<group>"; };
+		160449EB1D21E22300711BBB /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		160449ED1D21E23400711BBB /* MyAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
+		160449F01D21E6BA00711BBB /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		169871B11D1CB437002116DE /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		169871B31D1CB5AC002116DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -100,7 +108,7 @@
 		169871E41D1D9323002116DE /* SearchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		16C2E3BA1D1A53B800321A56 /* Hyve V0.07.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyve V0.07.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		16C2E3BF1D1A53B800321A56 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		16C2E3C11D1A53B800321A56 /* PendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		16C2E3C41D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16C2E3C91D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -173,6 +181,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160449E81D21E1AD00711BBB /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				160449E91D21E1C900711BBB /* MyAccountCell.swift */,
+				160449EB1D21E22300711BBB /* MyAccountViewController.swift */,
+				160449ED1D21E23400711BBB /* MyAccountViewModel.swift */,
+			);
+			name = MyAccount;
+			sourceTree = "<group>";
+		};
+		160449EF1D21E67700711BBB /* Completed */ = {
+			isa = PBXGroup;
+			children = (
+				16C2E3BF1D1A53B800321A56 /* CompletedViewController.swift */,
+			);
+			name = Completed;
+			sourceTree = "<group>";
+		};
 		169871AC1D1CB363002116DE /* Pending */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +218,7 @@
 				16EB59E11D1F4E0F006988FD /* UIButtonExtensions.swift */,
 				16E46B3D1D20800300627397 /* NoPasteTextField.swift */,
 				16E46B441D208F7200627397 /* NSDateExtensions.swift */,
+				160449F01D21E6BA00711BBB /* CurrentUser.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -230,12 +257,13 @@
 		16C2E3BC1D1A53B800321A56 /* Hyve V0.07 */ = {
 			isa = PBXGroup;
 			children = (
+				160449E81D21E1AD00711BBB /* MyAccount */,
 				16E46B3F1D20821600627397 /* Home */,
 				169871AE1D1CB396002116DE /* Login/Register */,
 				169871AC1D1CB363002116DE /* Pending */,
+				160449EF1D21E67700711BBB /* Completed */,
 				169871AD1D1CB378002116DE /* Models */,
 				16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */,
-				16C2E3BF1D1A53B800321A56 /* FirstViewController.swift */,
 				16C2E3C31D1A53B800321A56 /* Main.storyboard */,
 				16C2E3ED1D1A565400321A56 /* Assets.xcassets */,
 				16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */,
@@ -581,16 +609,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				16EB59E21D1F4E0F006988FD /* UIButtonExtensions.swift in Sources */,
+				160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */,
+				160449F11D21E6BA00711BBB /* CurrentUser.swift in Sources */,
 				16E46B411D208B0C00627397 /* PendingRequestCell.swift in Sources */,
+				160449EC1D21E22300711BBB /* MyAccountViewController.swift in Sources */,
 				16E46B431D208B9000627397 /* PendingRequestViewModel.swift in Sources */,
 				16C2E3C21D1A53B800321A56 /* PendingViewController.swift in Sources */,
 				169871DD1D1CC604002116DE /* SearchLocationAddressViewModel.swift in Sources */,
 				16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */,
 				16E46B451D208F7300627397 /* NSDateExtensions.swift in Sources */,
+				160449EA1D21E1C900711BBB /* MyAccountCell.swift in Sources */,
 				16E46B3E1D20800300627397 /* NoPasteTextField.swift in Sources */,
 				169871B21D1CB437002116DE /* BaseView.swift in Sources */,
 				169871DB1D1CC567002116DE /* HomeViewController.swift in Sources */,
-				16C2E3C01D1A53B800321A56 /* FirstViewController.swift in Sources */,
+				16C2E3C01D1A53B800321A56 /* CompletedViewController.swift in Sources */,
 				169871E11D1CD75F002116DE /* RequestCategoryViewModel.swift in Sources */,
 				169871E31D1CDB89002116DE /* RequestCategoryCell.swift in Sources */,
 				169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */,

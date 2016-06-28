@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  CompletedViewController.swift
 //  Hyve V0.07
 //
 //  Created by Jonathan Tan on 6/21/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class CompletedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
