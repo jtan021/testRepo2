@@ -68,6 +68,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var _generalNavigationBarView: UIView!
     @IBOutlet weak var _generalNavigationBarLabel: UILabel!
     // Job request outlets
+    @IBOutlet weak var _jobRequestScrollView: UIScrollView!
     @IBOutlet weak var _jobRequestView: UIView!
     @IBOutlet weak var _jobAddressTextView: UITextView!
     @IBOutlet weak var _jobDescriptionTextView: UITextView!
@@ -201,8 +202,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                         self._jobRequestView.hidden = true
                         self._generalNavigationBarView.hidden = true
                         
-                        // Show the _hyveNavigationBarView
+                        // Show the _hyveNavigationBarView and _searchNavigationBarView
                         self._hyveNavigationBarView.hidden = false
+                        self._searchNavigationBarView.hidden = false
                         
                     } else {
                         self.displayAlert("Request could not be saved", message: "Please try again later.")
@@ -224,7 +226,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self._searchNavigationBarViewOriginY.constant -= 154
         self._searchTextField.addTarget(self, action: #selector(HomeViewController.SearchTextFieldShouldBeginEditing(_:)), forControlEvents: .EditingDidBegin)
         self._searchLocationAddressTextField.addTarget(self, action: #selector(HomeViewController.SearchTextFieldShoudEndEditing(_:)), forControlEvents: .EditingDidEnd)
-        
         self.setupHyveTHLabel(_hyveNavigationBarLabel)
         
         // Bind ViewController to SearchLocationViewModel
@@ -522,6 +523,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 self._postJobButton.setImage(UIImage(named: "post"), forState: UIControlState.Normal)
             }
             
+            // Reset _jobRequestScrollView
+            self._jobRequestScrollView.setContentOffset(CGPointMake(0.0, 0.0), animated: false)
+            
+            // Setup _jobDescriptionTextView
+            self._jobDescriptionTextView.textColor = UIColor.lightGrayColor()
+            self._jobDescriptionTextView.text = PLACEHOLDER_TEXT
             
             // Hide _requestCategoryTableView and show _jobRequestView
             self._requestCategoryTableView.hidden = true
@@ -661,10 +668,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         if textView.textColor == UIColor.lightGrayColor() {
             textView.text = nil
             textView.textColor = UIColor.blackColor()
-        }
-        if (textView.text.isEmpty) {
-            textView.textColor = UIColor.lightGrayColor()
-            textView.text = self.PLACEHOLDER_TEXT
         }
         
         if(self._postJobButton.titleLabel?.text != POSTBUTTON_TEXT) {

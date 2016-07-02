@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Parse
 
 struct Constants {
 
+    // Parse
+    static let _currentUser = PFUser.currentUser()
+    
+    // THLabel
     static let kShadowColor1 = UIColor.blackColor
     static let kShadowColor2 = UIColor(white: 0.0, alpha: 0.75)
     static let kShadowOffset = CGSizeMake(0.0, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad ? 4.0 : 2.0)
@@ -21,7 +26,17 @@ struct Constants {
     static let kGradientStartColor = UIColor(colorLiteralRed: 229/255, green: 185/255, blue: 36/255, alpha: 1.0)
     static let kGradientEndColor = UIColor(colorLiteralRed: 255/255, green: 138/255, blue: 0/255, alpha: 1.0)
     
-    static let characterSet:NSCharacterSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789")
+    // Character sets
+    static let alphaNumericCharacterSet:NSCharacterSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789")
+    static let alphaNumericAndSymbolsCharacterSet:NSCharacterSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789!@#$%^&*?")
+    
+    // RequestCategory images
+    static let FoodDeliveryImage = UIImage(named:"food")
+    static let DrinkDeliveryImage = UIImage(named:"drink")
+    static let GroceryDeliveryImage = UIImage(named: "grocery")
+    static let WaitInLineImage = UIImage(named: "wait")
+    static let LaundryImage = UIImage(named: "laundry")
+    static let SpecialRequestImage = UIImage(named:"specialRequest")
     
 }
 

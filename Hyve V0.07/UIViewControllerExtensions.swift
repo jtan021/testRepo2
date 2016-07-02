@@ -183,6 +183,21 @@ extension UIViewController {
         textField.layer.cornerRadius = 5
     }
     
+    func setSecureTextEntry(secureTextEntry: Bool, textField: UITextField) {
+        UIView.performWithoutAnimation({() -> Void in
+            var resumeResponder: Bool = false
+            
+            if (textField.isFirstResponder()) {
+                resumeResponder = true
+                textField.resignFirstResponder()
+            }
+            textField.secureTextEntry = secureTextEntry
+            if resumeResponder {
+                textField.becomeFirstResponder()
+            }
+        })
+    }
+    
     // Name: getUTCFromLocalDate
     // Inputs: strDate: String
     // Outputs: String
@@ -209,5 +224,18 @@ extension UIViewController {
         return convertedDate
     }
     
+    // Name: getLocalFromUTCDate
+    // Inputs: strDate: String
+    // Outputs: NSDate
+    // Function: Take an input string which is in UTC time and convert it to local time as an NSDate object
+    func getLocalFromUTCDate(strDate: String) -> NSDate {
+        let dateFormat: NSDateFormatter = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormat.timeZone = NSTimeZone(name: "UTC")
+        let aDate: NSDate = dateFormat.dateFromString(strDate)!
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormat.timeZone = NSTimeZone.systemTimeZone()
+        return aDate
+    }
     
 }

@@ -1,15 +1,18 @@
 PODS:
   - Bond (4.3.1)
+  - MGSwipeTableCell (1.5.5)
   - THLabel (1.4.7)
 
 DEPENDENCIES:
   - Bond (~> 4.0)
+  - MGSwipeTableCell
   - THLabel (~> 1.4)
 
 SPEC CHECKSUMS:
   Bond: 55903fc67f09e8e49791a657163cabba1d6fb29d
+  MGSwipeTableCell: bafeb5f351124544c9364ecbdf24c7b06a37d340
   THLabel: 1a23e71d7738abfeacaf22ab409b981209b105ae
 
-PODFILE CHECKSUM: 3cfeb19687b8da37ad1e2cb639688ddbe4737724
+PODFILE CHECKSUM: 52ac5c8eac131daf1f6d88a32bda28e1bb2385da
 
 COCOAPODS: 1.0.1

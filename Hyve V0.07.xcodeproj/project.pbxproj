@@ -11,6 +11,8 @@
 		160449EC1D21E22300711BBB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449EB1D21E22300711BBB /* MyAccountViewController.swift */; };
 		160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449ED1D21E23400711BBB /* MyAccountViewModel.swift */; };
 		160449F11D21E6BA00711BBB /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449F01D21E6BA00711BBB /* CurrentUser.swift */; };
+		166F6CA61D26C9030000D80F /* PendingRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166F6CA51D26C9030000D80F /* PendingRequestCell.swift */; };
+		166F6CA81D26C9940000D80F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166F6CA71D26C9940000D80F /* PendingViewController.swift */; };
 		169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */; };
 		169871B21D1CB437002116DE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B11D1CB437002116DE /* BaseView.swift */; };
 		169871B41D1CB5AC002116DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B31D1CB5AC002116DE /* Constants.swift */; };
@@ -38,14 +40,12 @@
 		169871E51D1D9323002116DE /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871E41D1D9323002116DE /* SearchTextField.swift */; };
 		16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */; };
 		16C2E3C01D1A53B800321A56 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3BF1D1A53B800321A56 /* CompletedViewController.swift */; };
-		16C2E3C21D1A53B800321A56 /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3C11D1A53B800321A56 /* PendingViewController.swift */; };
 		16C2E3C51D1A53B800321A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C31D1A53B800321A56 /* Main.storyboard */; };
 		16C2E3CA1D1A53B800321A56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3C81D1A53B800321A56 /* LaunchScreen.storyboard */; };
 		16C2E3D51D1A53B800321A56 /* Hyve_V0_07Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3D41D1A53B800321A56 /* Hyve_V0_07Tests.swift */; };
 		16C2E3E01D1A53B800321A56 /* Hyve_V0_07UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C2E3DF1D1A53B800321A56 /* Hyve_V0_07UITests.swift */; };
 		16C2E3EE1D1A565400321A56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C2E3ED1D1A565400321A56 /* Assets.xcassets */; };
 		16E46B3E1D20800300627397 /* NoPasteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E46B3D1D20800300627397 /* NoPasteTextField.swift */; };
-		16E46B411D208B0C00627397 /* PendingRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E46B401D208B0C00627397 /* PendingRequestCell.swift */; };
 		16E46B431D208B9000627397 /* PendingRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E46B421D208B9000627397 /* PendingRequestViewModel.swift */; };
 		16E46B451D208F7300627397 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E46B441D208F7200627397 /* NSDateExtensions.swift */; };
 		16EB59E01D1F29A9006988FD /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EB59DF1D1F29A9006988FD /* MainSearchViewModel.swift */; };
@@ -80,6 +80,8 @@
 		160449EB1D21E22300711BBB /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		160449ED1D21E23400711BBB /* MyAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		160449F01D21E6BA00711BBB /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		166F6CA51D26C9030000D80F /* PendingRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequestCell.swift; sourceTree = "<group>"; };
+		166F6CA71D26C9940000D80F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		169871B11D1CB437002116DE /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		169871B31D1CB5AC002116DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -109,7 +111,6 @@
 		16C2E3BA1D1A53B800321A56 /* Hyve V0.07.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hyve V0.07.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C2E3BD1D1A53B800321A56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16C2E3BF1D1A53B800321A56 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
-		16C2E3C11D1A53B800321A56 /* PendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
 		16C2E3C41D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16C2E3C91D1A53B800321A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16C2E3CB1D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		16C2E3E11D1A53B800321A56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16C2E3ED1D1A565400321A56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16E46B3D1D20800300627397 /* NoPasteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPasteTextField.swift; sourceTree = "<group>"; };
-		16E46B401D208B0C00627397 /* PendingRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequestCell.swift; sourceTree = "<group>"; };
 		16E46B421D208B9000627397 /* PendingRequestViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequestViewModel.swift; sourceTree = "<group>"; };
 		16E46B441D208F7200627397 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		16EB59DF1D1F29A9006988FD /* MainSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
@@ -202,9 +202,9 @@
 		169871AC1D1CB363002116DE /* Pending */ = {
 			isa = PBXGroup;
 			children = (
-				16C2E3C11D1A53B800321A56 /* PendingViewController.swift */,
-				16E46B401D208B0C00627397 /* PendingRequestCell.swift */,
 				16E46B421D208B9000627397 /* PendingRequestViewModel.swift */,
+				166F6CA51D26C9030000D80F /* PendingRequestCell.swift */,
+				166F6CA71D26C9940000D80F /* PendingViewController.swift */,
 			);
 			name = Pending;
 			sourceTree = "<group>";
@@ -610,11 +610,11 @@
 			files = (
 				16EB59E21D1F4E0F006988FD /* UIButtonExtensions.swift in Sources */,
 				160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */,
+				166F6CA61D26C9030000D80F /* PendingRequestCell.swift in Sources */,
 				160449F11D21E6BA00711BBB /* CurrentUser.swift in Sources */,
-				16E46B411D208B0C00627397 /* PendingRequestCell.swift in Sources */,
+				166F6CA81D26C9940000D80F /* PendingViewController.swift in Sources */,
 				160449EC1D21E22300711BBB /* MyAccountViewController.swift in Sources */,
 				16E46B431D208B9000627397 /* PendingRequestViewModel.swift in Sources */,
-				16C2E3C21D1A53B800321A56 /* PendingViewController.swift in Sources */,
 				169871DD1D1CC604002116DE /* SearchLocationAddressViewModel.swift in Sources */,
 				16C2E3BE1D1A53B800321A56 /* AppDelegate.swift in Sources */,
 				16E46B451D208F7300627397 /* NSDateExtensions.swift in Sources */,
@@ -778,11 +778,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Hyve V0.07/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hyve V0.07-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -797,10 +799,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Hyve V0.07/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "JC.Hyve-V0-07";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hyve V0.07-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

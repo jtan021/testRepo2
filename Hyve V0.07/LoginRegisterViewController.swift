@@ -18,7 +18,7 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
      * section
      *
      */
-    
+
     /*
      *
      * OUTLETS
@@ -31,6 +31,7 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var _loginPasswordTextField: UITextField!
     // Registration View
     @IBOutlet weak var _hyveRegistrationLabel: UILabel!
+    @IBOutlet weak var _registerScrollView: UIScrollView!
     @IBOutlet weak var _registrationView: UIView!
     @IBOutlet weak var _viewToDim: UIView!
     @IBOutlet weak var _registrationFirstNameTextField: UITextField!
@@ -68,8 +69,12 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
         // First check that all fields are filled out.
         if (_loginUsernameTextField.text == "" || _loginPasswordTextField.text == "") {
             self.displayAlert("Missing field(s)", message: "Please enter your desired username & password to continue.")
-        } else if (_loginUsernameTextField.text!.rangeOfCharacterFromSet(Constants.characterSet.invertedSet) != nil) {
+        } else if (_loginUsernameTextField.text!.rangeOfCharacterFromSet(Constants.alphaNumericCharacterSet.invertedSet) != nil) {
             self.displayAlert("Invalid username", message: "Acceptable characters for a Hyve account username include letters a-z, A-Z, and numbers 0-9")
+        } else if (_loginPasswordTextField.text?.characters.count < 8) {
+            self.displayAlert("Invalid password", message: "Your password must be at least 8 characters long.")
+        } else if (_loginPasswordTextField.text!.rangeOfCharacterFromSet(Constants.alphaNumericAndSymbolsCharacterSet.invertedSet) != nil) {
+            self.displayAlert("Invalid password", message: "Acceptable characters for your password include alphanumeric letters and the follow symbols: !@#$%^&*?")
         } else {
             // Second check that the entered username is not taken
             let query = PFQuery(className: "_User")
@@ -81,7 +86,7 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
                         self.displayAlert("Account unavailable", message: "Username is already in use.")
                     } else {
                         print("username is available")
-                        
+                        self._registerScrollView.setContentOffset(CGPointMake(0.0, 0.0), animated: false)
                         // Since fields are not nil and username is available, show the registrationView
                         self._viewToDim.hidden = false
                         self._registrationView.hidden = false
@@ -204,6 +209,8 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
         self._registrationEmailAddressTextField.returnKeyType = UIReturnKeyType.Done
         self._registrationConfirmPasswordTextField.returnKeyType = UIReturnKeyType.Done
         
+        // Set _registrationEmailAddressTextField keyboard to Email Type
+        self._registrationEmailAddressTextField.keyboardType = UIKeyboardType.EmailAddress
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -217,10 +224,34 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .MotionShake {
+            if(self._registrationView.hidden == true) {
+                if(self._loginPasswordTextField.secureTextEntry == true) {
+                    self.setSecureTextEntry(false, textField: self._loginPasswordTextField)
+                } else {
+                    self.setSecureTextEntry(true, textField: self._loginPasswordTextField)
+                }
+                
+            } else {
+                if(self._registrationConfirmPasswordTextField.secureTextEntry == true) {
+                    self.setSecureTextEntry(false, textField: self._registrationConfirmPasswordTextField)
+                } else {
+                    self.setSecureTextEntry(true, textField: self._registrationConfirmPasswordTextField)
+                }
+            }
+        }
+    }
+    
     /*
      *
      * OTHER FUNCTIONS
      * section
      *
      */
+
 }
