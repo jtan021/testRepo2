@@ -253,5 +253,24 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
      * section
      *
      */
+    // Name: textFieldDidBeginEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Push view up if textField == offerTF || keyTF is edited
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if(textField == self._loginUsernameTextField || textField == self._loginPasswordTextField) {
+            self.animateTextField(textField, up:true)
+        }
+    }
+    
+    // Name: textFieldDidEndEditing
+    // Inputs: ...
+    // Outputs: ...
+    // Function: Push view down if textfield == offerTF || keyTF is finished editing
+    func textFieldDidEndEditing(textField: UITextField) {
+        if(textField == self._loginUsernameTextField || textField == self._loginPasswordTextField) {
+            self.animateTextField(textField, up:false)
+        }
+    }
 
 }

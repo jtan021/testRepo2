@@ -11,8 +11,12 @@
 		160449EC1D21E22300711BBB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449EB1D21E22300711BBB /* MyAccountViewController.swift */; };
 		160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449ED1D21E23400711BBB /* MyAccountViewModel.swift */; };
 		160449F11D21E6BA00711BBB /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160449F01D21E6BA00711BBB /* CurrentUser.swift */; };
+		1626C51D1D27619C004660F3 /* PendingAvailableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1626C51C1D27619B004660F3 /* PendingAvailableCell.swift */; };
+		1626C51F1D2775A1004660F3 /* PendingAvailableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1626C51E1D2775A1004660F3 /* PendingAvailableViewModel.swift */; };
 		166F6CA61D26C9030000D80F /* PendingRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166F6CA51D26C9030000D80F /* PendingRequestCell.swift */; };
 		166F6CA81D26C9940000D80F /* PendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166F6CA71D26C9940000D80F /* PendingViewController.swift */; };
+		169538B81D28E34C0004F0CD /* ViewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169538B71D28E34C0004F0CD /* ViewUserViewController.swift */; };
+		169538BA1D28E7910004F0CD /* LeftToRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169538B91D28E7900004F0CD /* LeftToRightSegue.swift */; };
 		169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */; };
 		169871B21D1CB437002116DE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B11D1CB437002116DE /* BaseView.swift */; };
 		169871B41D1CB5AC002116DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169871B31D1CB5AC002116DE /* Constants.swift */; };
@@ -80,8 +84,12 @@
 		160449EB1D21E22300711BBB /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		160449ED1D21E23400711BBB /* MyAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		160449F01D21E6BA00711BBB /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		1626C51C1D27619B004660F3 /* PendingAvailableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingAvailableCell.swift; sourceTree = "<group>"; };
+		1626C51E1D2775A1004660F3 /* PendingAvailableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingAvailableViewModel.swift; sourceTree = "<group>"; };
 		166F6CA51D26C9030000D80F /* PendingRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingRequestCell.swift; sourceTree = "<group>"; };
 		166F6CA71D26C9940000D80F /* PendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingViewController.swift; sourceTree = "<group>"; };
+		169538B71D28E34C0004F0CD /* ViewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUserViewController.swift; sourceTree = "<group>"; };
+		169538B91D28E7900004F0CD /* LeftToRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftToRightSegue.swift; sourceTree = "<group>"; };
 		169871AF1D1CB3D1002116DE /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		169871B11D1CB437002116DE /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		169871B31D1CB5AC002116DE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -205,6 +213,9 @@
 				16E46B421D208B9000627397 /* PendingRequestViewModel.swift */,
 				166F6CA51D26C9030000D80F /* PendingRequestCell.swift */,
 				166F6CA71D26C9940000D80F /* PendingViewController.swift */,
+				1626C51C1D27619B004660F3 /* PendingAvailableCell.swift */,
+				1626C51E1D2775A1004660F3 /* PendingAvailableViewModel.swift */,
+				169538B71D28E34C0004F0CD /* ViewUserViewController.swift */,
 			);
 			name = Pending;
 			sourceTree = "<group>";
@@ -219,6 +230,7 @@
 				16E46B3D1D20800300627397 /* NoPasteTextField.swift */,
 				16E46B441D208F7200627397 /* NSDateExtensions.swift */,
 				160449F01D21E6BA00711BBB /* CurrentUser.swift */,
+				169538B91D28E7900004F0CD /* LeftToRightSegue.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -608,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1626C51D1D27619C004660F3 /* PendingAvailableCell.swift in Sources */,
 				16EB59E21D1F4E0F006988FD /* UIButtonExtensions.swift in Sources */,
 				160449EE1D21E23400711BBB /* MyAccountViewModel.swift in Sources */,
 				166F6CA61D26C9030000D80F /* PendingRequestCell.swift in Sources */,
@@ -623,10 +636,13 @@
 				169871B21D1CB437002116DE /* BaseView.swift in Sources */,
 				169871DB1D1CC567002116DE /* HomeViewController.swift in Sources */,
 				16C2E3C01D1A53B800321A56 /* CompletedViewController.swift in Sources */,
+				169538BA1D28E7910004F0CD /* LeftToRightSegue.swift in Sources */,
 				169871E11D1CD75F002116DE /* RequestCategoryViewModel.swift in Sources */,
 				169871E31D1CDB89002116DE /* RequestCategoryCell.swift in Sources */,
 				169871B01D1CB3D1002116DE /* LoginRegisterViewController.swift in Sources */,
 				169871B41D1CB5AC002116DE /* Constants.swift in Sources */,
+				169538B81D28E34C0004F0CD /* ViewUserViewController.swift in Sources */,
+				1626C51F1D2775A1004660F3 /* PendingAvailableViewModel.swift in Sources */,
 				169871B61D1CB6F1002116DE /* UIViewControllerExtensions.swift in Sources */,
 				169871E51D1D9323002116DE /* SearchTextField.swift in Sources */,
 				16EB59E01D1F29A9006988FD /* MainSearchViewModel.swift in Sources */,

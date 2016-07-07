@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Set navigation bar color
         let navigationBarAppearance = UINavigationBar.appearance()
@@ -30,6 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set statusBarStyle
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        // Setup tableView selected cell color
+        // set up your background color view
+//        let colorView = UIView()
+//        colorView.backgroundColor = colorWithHexString("E5B924")
+//        // use UITableViewCell.appearance() to configure the default appearance of all UITableViewCells in your app
+//        UITableViewCell.appearance().selectedBackgroundView = colorView
         
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
@@ -170,6 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
+    
     
 }
 

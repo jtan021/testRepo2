@@ -190,6 +190,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 newRequest["jobCompleted"] = false
                 newRequest["jobLastUpdated"] = currentDate
                 newRequest["jobEmployee"] = ""
+                newRequest["jobPendingEmployees"] = ""
                 
                 newRequest.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                     if (success) {

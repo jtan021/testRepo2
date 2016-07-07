@@ -21,6 +21,7 @@ struct PendingRequestItem {
     var Status: String = ""
     var CompletionStatus: Bool?
     var Employee: String = ""
+    var AvailableEmployees: String = ""
     var Image:UIImage?
 }
 
@@ -33,6 +34,8 @@ class PendingRequestViewModel {
      */
     let _currentUser = PFUser.currentUser()
     let _pendingRequestTableData = ObservableArray<PendingRequestItem>()
+    var _pendingTableView:UITableView?
+    
     var PendingRequestArray = [PendingRequestItem]()
     let FoodDeliveryImage = UIImage(named:"food")
     let DrinkDeliveryImage = UIImage(named:"drink")
@@ -136,6 +139,7 @@ class PendingRequestViewModel {
                             let jobKeywords = request["jobKeywords"] as! String
                             let jobCompletionStatus = request["jobCompleted"] as! Bool
                             let jobEmployee = request["jobEmployee"] as! String
+                            let jobAvailableEmployees = request["jobPendingEmployees"] as! String
                             var jobImage: UIImage?
                             
                             var currentStatus = request["jobStatus"] as! String
@@ -185,12 +189,13 @@ class PendingRequestViewModel {
                             // if status: expired put a red dot for jobStatus image
                             
                             // Create PendingRequestItem
-                            let newPendingRequestItem = PendingRequestItem(JobID: jobID!, Title: jobTitle, Address: jobAddress, Category: jobCategory, Description: jobDescription, LifeRemaining: lifeRemaining, OfferForCompletion: jobOfferForCompletion, Keywords: jobKeywords, Status: currentStatus, CompletionStatus: jobCompletionStatus, Employee: jobEmployee, Image: jobImage)
+                            let newPendingRequestItem = PendingRequestItem(JobID: jobID!, Title: jobTitle, Address: jobAddress, Category: jobCategory, Description: jobDescription, LifeRemaining: lifeRemaining, OfferForCompletion: jobOfferForCompletion, Keywords: jobKeywords, Status: currentStatus, CompletionStatus: jobCompletionStatus, Employee: jobEmployee, AvailableEmployees: jobAvailableEmployees, Image: jobImage)
                             // Append PendingRequestItem to PendingRequestArray then to _pendingRequestTableData
                             dispatch_async(dispatch_get_main_queue()) {
                                 self.PendingRequestArray.append(newPendingRequestItem)
                                 self._pendingRequestTableData.insertContentsOf(self.PendingRequestArray, atIndex: 0)
                                 self.PendingRequestArray.removeAll()
+                                self._pendingTableView?.reloadData()
                             }
                         }
                     }
