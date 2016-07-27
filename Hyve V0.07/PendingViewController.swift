@@ -20,6 +20,12 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     private let _pendingRequestViewModel = PendingRequestViewModel()
     private let _pendingAvailableViewModel = PendingAvailabeViewModel()
+    private var _pendingRequestTableViewIndex:Int = 0
+    private var _isPersonalTableView:Bool = true
+    var EMPTY_REQUEST = "No Pending Requests."
+    var EMPTY_WORKING = "No Pending Jobs."
+    var _screenWidth: CGFloat?
+    var _screenRect:CGRect = UIScreen.mainScreen().bounds
     
     /*
      *
@@ -32,6 +38,12 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var _pendingAvailableView: UIView!
     @IBOutlet weak var _pendingAvailableTitle: UILabel!
     @IBOutlet weak var _pendingAvailableUsersTableView: UITableView!
+    @IBOutlet weak var _pendingPersonalWorkingButton: UIButton!
+    @IBOutlet weak var _pendingWorkingTableViewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var _pendingRequestTableViewRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var _pendingEmptyTableLabel: UILabel!
+    @IBOutlet weak var _pendingEmptyView: UIView!
+    @IBOutlet weak var _pendingWorkTableView: UITableView!
     
     /*
      *
@@ -43,6 +55,45 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
         print("We have this many employees: \(self._pendingAvailableViewModel._pendingAvailableEmployeeTableData.count)")
         self._pendingAvailableView.hidden = true
         self._viewToDim.hidden = true
+    }
+    
+    @IBAction func pendingPersonalWorkingButtonDidTouch(sender: AnyObject) {
+        print("touched")
+        if (_pendingPersonalWorkingButton.titleLabel!.text == "Personal") {
+            print("touched2")
+            self._isPersonalTableView = false
+            self._pendingEmptyView.hidden = true
+            self._pendingPersonalWorkingButton.setTitle("Working", forState: .Normal)
+            self._pendingRequestTableViewRightConstraint.constant += self._screenWidth!
+            self._pendingWorkingTableViewLeftConstraint.constant -= self._screenWidth!
+            UIView.animateWithDuration(0.5, animations: {() -> Void in
+                self.view!.layoutIfNeeded()
+                // Called on parent view
+            })
+            
+            // ...
+            self._pendingEmptyTableLabel.text = EMPTY_WORKING
+            self._pendingEmptyView.hidden = false
+            
+        } else if (_pendingPersonalWorkingButton.titleLabel!.text == "Working") {
+            print("touched3")
+            self._isPersonalTableView = true
+            self._pendingEmptyView.hidden = true
+            self._pendingPersonalWorkingButton.setTitle("Personal", forState: .Normal)
+            self.refreshPendingRequestsTableView(UIRefreshControl())
+            self._pendingRequestTableViewRightConstraint.constant -= self._screenWidth!
+            self._pendingWorkingTableViewLeftConstraint.constant += self._screenWidth!
+            UIView.animateWithDuration(0.5, animations: {() -> Void in
+                self.view!.layoutIfNeeded()
+                // Called on parent view
+            })
+        }
+    }
+    
+    @IBAction func pendingEmptyTableRefreshDidTouch(sender: AnyObject) {
+        if(_isPersonalTableView) {
+            self.refreshPendingRequestsTableView(UIRefreshControl())
+        }
     }
     
     
@@ -61,14 +112,37 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
         self._pendingAvailableUsersTableView.delegate = self
         self._pendingAvailableViewModel._pendingAvailableEmployeeTableView = self._pendingAvailableUsersTableView
         
+        // Move PendingWorkingTableView off screen
+        self._screenWidth = self._screenRect.size.width
+        self._pendingWorkingTableViewLeftConstraint.constant += _screenWidth!
+        
         // Add refresh to TableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshPendingRequestsTableView:", forControlEvents: .ValueChanged)
         self._pendingRequestTableView.addSubview(refreshControl)
-    
+        self.refreshPendingRequestsTableView(UIRefreshControl())
+        print(self._pendingRequestViewModel._pendingRequestTableData.count)
+        if(self._pendingRequestViewModel._pendingRequestTableData.isEmpty) {
+            self._pendingEmptyView.hidden = false
+        } else {
+            self._pendingEmptyView.hidden = true
+        }
+        
         // Hide _pendingAvailableView and _viewToDim
         self._pendingAvailableView.hidden = true
         self._viewToDim.hidden = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if(_isPersonalTableView) {
+            self.refreshPendingRequestsTableView(UIRefreshControl())
+            
+            if(self._pendingRequestViewModel._pendingRequestTableData.isEmpty) {
+                self._pendingEmptyView.hidden = false
+            } else {
+                self._pendingEmptyView.hidden = true
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -84,22 +158,16 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
             destinationViewController._userUsername = username
             destinationViewController._userProfilePictureImage = profilePicture
             destinationViewController._userAboutMe = "About me: This is me! Fix this later"
+        } else if (segue.identifier == "editPendingRequestSegue") {
+            let destinationViewController = segue.destinationViewController as! EditPendingRequestViewController
+            let indexPath = self._pendingRequestTableViewIndex
+            destinationViewController.jobId = _pendingRequestViewModel._pendingRequestTableData[indexPath].JobId
+            destinationViewController.jobTitle = _pendingRequestViewModel._pendingRequestTableData[indexPath].Title
+            destinationViewController.jobCategory = _pendingRequestViewModel._pendingRequestTableData[indexPath].Category
+            destinationViewController.jobDescription = _pendingRequestViewModel._pendingRequestTableData[indexPath].Description
+            destinationViewController.jobOffer = _pendingRequestViewModel._pendingRequestTableData[indexPath].OfferForCompletion
+            destinationViewController.jobKeywords = _pendingRequestViewModel._pendingRequestTableData[indexPath].Keywords
         }
-//        
-//        if(segue == "viewUserSegue") {
-//            print("I AM INNNNN")
-//            let destinationViewController = segue.destinationViewController as! ViewUserViewController
-//            let indexPath = self._pendingAvailableUsersTableView.indexPathForSelectedRow!
-//            let firstName = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].FirstName
-//            let lastName = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].LastName
-//            let username = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].Username
-//            let profilePicture = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].ProfilePicture
-//            destinationViewController._userFullNameLabel.text = "\(firstName) \(lastName)"
-//            destinationViewController._userUsernameLabel.text = username
-//            print("picture \(profilePicture)")
-//            destinationViewController._userProfilePicture.image = profilePicture
-//            destinationViewController._userAboutMeTextView.text = "About me: This is me! Fix this later"
-//        }
     }
     
     /*
@@ -149,15 +217,16 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         if(tableView == _pendingRequestTableView) {
+            _pendingRequestTableViewIndex = indexPath.row
             let reuseIdentifier = "_pendingRequestCell"
             let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! PendingRequestCell!
             let availableEmployees = _pendingRequestViewModel._pendingRequestTableData[indexPath.row].AvailableEmployees
             let availableEmployeesArray = availableEmployees.componentsSeparatedByString(",")
-            
-            cell._pendingRequestTitle.text =  _pendingRequestViewModel._pendingRequestTableData[indexPath.row].Title
-            cell._pendingRequestLifetime.text = _pendingRequestViewModel._pendingRequestTableData[indexPath.row].LifeRemaining
+            let pendingRequestTableData = _pendingRequestViewModel._pendingRequestTableData[indexPath.row]
+            cell._pendingRequestTitle.text = pendingRequestTableData.Title
+            cell._pendingRequestLifetime.text = pendingRequestTableData.LifeRemaining
             cell._pendingRequestEmployeeNotification.text = "\(availableEmployeesArray.count - 1)"
-            cell._pendingRequestImage.image = _pendingRequestViewModel._pendingRequestTableData[indexPath.row].Image
+            cell._pendingRequestImage.image = pendingRequestTableData.Image
             cell.delegate = self //optional
             
             //configure left buttons
@@ -176,7 +245,8 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
                 return true
             }),MGSwipeButton(title: " Edit ", backgroundColor: self.colorWithHexString("8FE257"), callback: {
                 (sender: MGSwipeTableCell!) -> Bool in
-                print("edit Convenience callback for swipe buttons!")
+                
+                self.performSegueWithIdentifier("editPendingRequestSegue", sender: self)
                 return true
             })]
             cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
@@ -193,25 +263,8 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
             cell._pendingAvailableImage.image = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].ProfilePicture
             cell._pendingAvailableUsername.text = _pendingAvailableViewModel._pendingAvailableEmployeeTableData[indexPath.row].Username
             cell.delegate = self
-            
-//            
-//            //configure left buttons
-//            cell.leftButtons = [MGSwipeButton(title: "", icon: UIImage(named:"accept"), backgroundColor: self.colorWithHexString("8FE257"), callback: {
-//                (sender: MGSwipeTableCell!) -> Bool in
-//                print("accept Convenience callback for swipe buttons!")
-//                return true
-//            })]
-//            cell.leftSwipeSettings.transition = MGSwipeTransition.Drag
-//            
-//            
-//            //configure right buttons
-//            cell.rightButtons = [MGSwipeButton(title: "", icon: UIImage(named:"remove5"), backgroundColor: self.colorWithHexString("E56F69"), callback: {
-//                (sender: MGSwipeTableCell!) -> Bool in
-//                print("remove Convenience callback for swipe buttons!")
-//                return true
-//            })]
-//            cell.rightSwipeSettings.transition = MGSwipeTransition.Drag
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("kaboom") as! PendingAvailableCell!
             return cell
@@ -225,7 +278,6 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let selectionColor = UIView() as UIView
         selectionColor.layer.borderWidth = 2
-//        selectionColor.layer.borderColor = UIColor.blueColor().CGColor
         selectionColor.backgroundColor = self.colorWithHexString("F9E93B")
         cell.selectedBackgroundView = selectionColor
     }
@@ -274,7 +326,7 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
         let YesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) {
             UIAlertAction in
             // Attempt remove from Parse Database
-            let jobId = self._pendingRequestViewModel._pendingRequestTableData[index].JobID
+            let jobId = self._pendingRequestViewModel._pendingRequestTableData[index].JobId
             let query = PFQuery(className: "JobRequest")
             query.whereKey("objectId", equalTo: jobId)
             query.getFirstObjectInBackgroundWithBlock {
@@ -290,7 +342,9 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
                             dispatch_async(dispatch_get_main_queue()) {
                                 self.refreshPendingRequestsTableView(UIRefreshControl())
                             }
+
                             self.DeleteConfirmationAlert(self._pendingRequestViewModel._pendingRequestTableData[index].Title)
+                            
                         } else {
                             self.displayAlert("Oops, something went wrong", message: "Please try again later.")
                         }
@@ -324,6 +378,11 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
         let OkayAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {
             UIAlertAction in
             self._pendingRequestTableView.reloadData()
+            if(self._pendingRequestViewModel._pendingRequestTableData.isEmpty) {
+                self._pendingEmptyView.hidden = false
+            } else {
+                self._pendingEmptyView.hidden = true
+            }
             return
         }
         
@@ -342,7 +401,16 @@ class PendingViewController: UIViewController, UITableViewDataSource, UITableVie
         dispatch_async(dispatch_get_main_queue()) {
             self._pendingRequestViewModel.fetchDataFromDataBase()
         }
+        
         self._pendingRequestTableView.reloadData()
+        
+        self._pendingEmptyTableLabel.text = EMPTY_REQUEST
+        if(self._pendingRequestViewModel._pendingRequestTableData.isEmpty) {
+            self._pendingEmptyView.hidden = false
+        } else {
+            self._pendingEmptyView.hidden = true
+        }
+        
         refreshControl.endRefreshing()
     }
 }

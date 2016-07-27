@@ -7,6 +7,7 @@
 //
 
 import Parse
+import Firebase
 import UIKit
 
 @UIApplicationMain
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Set navigation bar color
         let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : colorWithHexString("E5B924")]
         navigationBarAppearance.tintColor = colorWithHexString("181818")
         navigationBarAppearance.barTintColor = colorWithHexString("181818")
         navigationBarAppearance.translucent = false
@@ -126,6 +128,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        self.window?.rootViewController = initialViewController
         //        self.window?.makeKeyAndVisible()
         
+        // Setup Firebase
+        FIRApp.configure()
+
         return true
     }
     

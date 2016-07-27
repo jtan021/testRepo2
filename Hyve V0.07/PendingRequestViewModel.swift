@@ -10,7 +10,7 @@ import Bond
 import Parse
 
 struct PendingRequestItem {
-    var JobID: String = ""
+    var JobId: String = ""
     var Title: String = ""
     var Address: String = ""
     var Category: String = ""
@@ -130,7 +130,7 @@ class PendingRequestViewModel {
                             
                             // If job is not expired, continue to add it to the TableViewData
                         } else {
-                            let jobID = request.objectId
+                            let jobId = request.objectId
                             let jobTitle = request["jobTitle"] as! String
                             let jobAddress = request["jobAddress"] as! String
                             let jobCategory = request["jobCategory"] as! String
@@ -189,7 +189,7 @@ class PendingRequestViewModel {
                             // if status: expired put a red dot for jobStatus image
                             
                             // Create PendingRequestItem
-                            let newPendingRequestItem = PendingRequestItem(JobID: jobID!, Title: jobTitle, Address: jobAddress, Category: jobCategory, Description: jobDescription, LifeRemaining: lifeRemaining, OfferForCompletion: jobOfferForCompletion, Keywords: jobKeywords, Status: currentStatus, CompletionStatus: jobCompletionStatus, Employee: jobEmployee, AvailableEmployees: jobAvailableEmployees, Image: jobImage)
+                            let newPendingRequestItem = PendingRequestItem(JobId: jobId!, Title: jobTitle, Address: jobAddress, Category: jobCategory, Description: jobDescription, LifeRemaining: lifeRemaining, OfferForCompletion: jobOfferForCompletion, Keywords: jobKeywords, Status: currentStatus, CompletionStatus: jobCompletionStatus, Employee: jobEmployee, AvailableEmployees: jobAvailableEmployees, Image: jobImage)
                             // Append PendingRequestItem to PendingRequestArray then to _pendingRequestTableData
                             dispatch_async(dispatch_get_main_queue()) {
                                 self.PendingRequestArray.append(newPendingRequestItem)

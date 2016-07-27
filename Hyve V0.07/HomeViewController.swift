@@ -22,6 +22,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     private let _mainSearchViewModel = MainSearchViewModel()
     private let _searchLocationAddressViewModel = SearchLocationAddressViewModel()
     private let _requestCategoryViewModel = RequestCategoryViewModel()
+    var chosenCoordinate: CLLocationCoordinate2D?
+    var jobCoordinateLAT: Double = 0
+    var jobCoordinateLONG: Double = 0
     var _geoCoder: CLGeocoder?
     let _locationManager = CLLocationManager()
     var _categoryPickerView = UIPickerView()
@@ -97,6 +100,14 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self._hyveNavigationBarView.hidden = false
     }
     
+    @IBAction func searchButtonDidTouch(sender: AnyObject) {
+        if(_searchHYVETextField.text == "") {
+            self.displayAlert("Search is empty", message: "Please give us more information on what you are searching for like \"Coffee\" or \"Plumbing\".")
+        } else {
+            searchMap()
+        }
+    }
+    
     @IBAction func SwitchSearchViewDidTouch(sender: AnyObject) {
         self._switchSearchViewButton.setBackgroundColor(colorWithHexString("E5B924"), forState: UIControlState.Highlighted)
         if(self._switchSearchViewButton.currentImage == UIImage(named: "list2")) {
@@ -168,6 +179,14 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             // 1) Verify user
             if _currentUser != nil {
                 // 2) Save the request in "JobRequest"
+                
+                // 2.1) Get current latitude and longitude
+                self.chosenCoordinate = self._mapView.centerCoordinate
+                self.jobCoordinateLAT = (chosenCoordinate?.latitude)!
+                self.jobCoordinateLONG = (chosenCoordinate?.longitude)!
+                print("LAT = \(jobCoordinateLAT)")
+                print("LONG = \(jobCoordinateLONG)")
+                
                 let username = _currentUser!.username!
                 let firstName = _currentUser!["firstName"] as! String
                 let lastName = _currentUser!["lastName"] as! String
@@ -189,6 +208,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 newRequest["jobStatus"] = "Active"
                 newRequest["jobCompleted"] = false
                 newRequest["jobLastUpdated"] = currentDate
+                newRequest["jobCoordinateLAT"] = self.jobCoordinateLAT
+                newRequest["jobCoordinateLONG"] = self.jobCoordinateLONG
                 newRequest["jobEmployee"] = ""
                 newRequest["jobPendingEmployees"] = ""
                 
@@ -223,6 +244,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
      *
      */
     override func viewDidLoad() {
+        RefreshMapAnnotations()
+        
         // Set up _hyveNavigationBarView & _searchNavigationBarView
         self._searchNavigationBarViewOriginY.constant -= 154
         self._searchTextField.addTarget(self, action: #selector(HomeViewController.SearchTextFieldShouldBeginEditing(_:)), forControlEvents: .EditingDidBegin)
@@ -380,6 +403,65 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             cell._requestTitle.text = dataSource[indexPath.section][indexPath.row].Title
             cell._requestImage.image = dataSource[indexPath.section][indexPath.row].Image
             return cell
+        }
+    }
+    
+    func searchMap() {
+        if(_searchHYVETextField.text != "") {
+            let allAnnotations = self._mapView.annotations
+            self._mapView.removeAnnotations(allAnnotations)
+            
+            var searchArray:[String] = (_searchHYVETextField.text?.componentsSeparatedByString(" "))!
+            let query = PFQuery(className: "JobRequest")
+            query.whereKey("jobTitle", containsAllObjectsInArray: searchArray)
+            query.findObjectsInBackgroundWithBlock {
+                (usersRequests: [PFObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    // The find succeeded.
+                    // Do something with the found objects
+                    if let requests = usersRequests {
+                        for request in requests {
+                            if(request["jobCoordinateLAT"] != nil && request["jobCoordinateLONG"] != nil) {
+                                let requestLAT = request["jobCoordinateLAT"] as! Double
+                                let requestLONG = request["jobCoordinateLONG"] as! Double
+                                let requestCoordinate:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: requestLAT, longitude: requestLONG)
+                                
+                                let annotation = MKPointAnnotation()
+                                annotation.coordinate = requestCoordinate
+                                annotation.title = request["jobTitle"] as! String
+                                annotation.subtitle = request["jobOfferForCompletion"] as! String
+                                self._mapView.addAnnotation(annotation)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func RefreshMapAnnotations() {
+        let query = PFQuery(className:"JobRequest")
+        query.findObjectsInBackgroundWithBlock {
+            (usersRequests: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                // The find succeeded.
+                // Do something with the found objects
+                if let requests = usersRequests {
+                    for request in requests {
+                        if(request["jobCoordinateLAT"] != nil && request["jobCoordinateLONG"] != nil) {
+                            let requestLAT = request["jobCoordinateLAT"] as! Double
+                            let requestLONG = request["jobCoordinateLONG"] as! Double
+                            let requestCoordinate:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: requestLAT, longitude: requestLONG)
+                        
+                            let annotation = MKPointAnnotation()
+                            annotation.coordinate = requestCoordinate
+                            annotation.title = request["jobTitle"] as! String
+                            annotation.subtitle = request["jobOfferForCompletion"] as! String
+                            self._mapView.addAnnotation(annotation)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -629,7 +711,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         if pickerView == _datePickerView {
             let columnView = UILabel(frame: CGRectMake(30, 0, _screenWidth!/6 - 15, 30))
-            let columnViewNum = UILabel(frame: CGRectMake(30, 0, 20, 30))
             if(component == 1) {
                 columnView.text = "Day"
             } else if(component == 3) {

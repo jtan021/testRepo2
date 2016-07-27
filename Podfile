@@ -3,6 +3,7 @@
 
 target 'Hyve V0.07' do
   pod 'Bond', '~> 4.0'
+  pod 'Firebase'
   pod 'THLabel', '~> 1.4'
   pod 'MGSwipeTableCell'  
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks

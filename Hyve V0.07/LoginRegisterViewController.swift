@@ -116,6 +116,7 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate {
                 user.email = _registrationEmailAddressTextField.text
                 user["firstName"] = _registrationFirstNameTextField.text
                 user["lastName"] = _registrationLastNameTextField.text
+                user["aboutMe"] = ""
                 user["currentLAT"] = 0
                 user["currentLONG"] = 0
                 let image = UIImagePNGRepresentation(UIImage(named: "gender_neutral_user")!)

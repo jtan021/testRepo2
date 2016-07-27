@@ -42,11 +42,7 @@ class ViewUserViewController: UIViewController {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    @IBAction func acceptButtonDidTouch(sender: AnyObject) {
-    }
 
-    @IBAction func removeFromListDidTouch(sender: AnyObject) {
-    }
     /*
      *
      * OVERRIDED FUNCTIONS
@@ -54,7 +50,7 @@ class ViewUserViewController: UIViewController {
      *
      */
     override func viewDidLoad() {
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBarHidden = true
         self.navigationItem.hidesBackButton = false
         
         self._userFullNameLabel.text = _userFullName

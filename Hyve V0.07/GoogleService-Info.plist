@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>787580274542-583ic5lu9inqp94p2h6b3ugaqo7bupp1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.787580274542-583ic5lu9inqp94p2h6b3ugaqo7bupp1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA3m6rjL-QtmK5rc86RbXX0m65Zx1LB-RY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>787580274542</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>JT.Hyve-V0-07</string>
+	<key>PROJECT_ID</key>
+	<string>hyvemoja</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hyvemoja.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:787580274542:ios:7768a4819913c498</string>
+	<key>DATABASE_URL</key>
+	<string>https://hyvemoja.firebaseio.com</string>
+</dict>
+</plist>
